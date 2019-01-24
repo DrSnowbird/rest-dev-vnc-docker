@@ -24,7 +24,7 @@ fi
 #### Prepare to start Mongodb ####
 MONGODB_DIR=$HOME/mongodb
 mkdir -p $HOME/mongodb
-nohup mongod --dbpath ${MONGODB_DIR) &
+nohup mongod --dbpath ${MONGODB_DIR) 2>&1 > $HOME/logs/$(basename $0).log &
 
 ## not work inside Docker Container: Use the above steps
 sudo service mongod start

@@ -13,7 +13,7 @@ if [ ! -s $HOME/$(basename $0).installed ]; then
     PRODUCT_EXE=/usr/bin/atom-beta
     sudo ln -s ${PRODUCT_EXE} /usr/bin/atom
     mkdir -p $HOME/logs
-    nohup /usr/bin/${PRODUCT_EXE} 2>&1 > $HOME/logs/$(basename $0).log
+    nohup /usr/bin/${PRODUCT_EXE} 2>&1 > $HOME/logs/$(basename $0).log &
 else
     echo "... Installed before already! ..."
 fi

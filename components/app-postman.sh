@@ -10,7 +10,7 @@ if [ ! -s /usr/bin/postman ]; then
 fi
 
 mkdir -p $HOME/logs
-nohup /usr/bin/postman 2>&1 > $HOME/logs/$(basename $0).log
+nohup /usr/bin/postman 2>&1 > $HOME/logs/$(basename $0).log &
 
 
 

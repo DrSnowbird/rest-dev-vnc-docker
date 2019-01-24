@@ -38,6 +38,6 @@ mkdir -p ${HOME}/.mongodb/${PRODUCT}-community/plugins
 #    # This loads nvm
 
 mkdir -p $HOME/logs
-nohup /usr/bin/${PRODUCT_EXE} 2>&1 > $HOME/logs/$(basename $0).log
+nohup /usr/bin/${PRODUCT_EXE} 2>&1 > $HOME/logs/$(basename $0).log &
 
 
