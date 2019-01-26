@@ -1,4 +1,0 @@
-2019-01-25 23:45:54,952 INFO  [DefaultSoapUICore] Creating new settings at [/home/user1/soapui-settings.xml]
-2019-01-25 23:45:54,973 INFO  [PluginManager] 0 plugins loaded in 0 ms
-2019-01-25 23:45:54,973 INFO  [DefaultSoapUICore] All plugins loaded
-2019-01-25 23:45:58,499 INFO  [SoapUI] Used java version: 1.8.0_191
