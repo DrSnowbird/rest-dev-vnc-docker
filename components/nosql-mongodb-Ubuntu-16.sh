@@ -1,8 +1,9 @@
 #!/bin/bash -x
 
 MONGODB_VERSION=4.0
+PRODUCT_EXE=/usr/bin/mongod
 
-if [ ! -s /usr/bin/mongod ]; then
+if [ ! -s ${PRODUCT_EXE} ]; then
 
     sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
 
@@ -20,10 +21,19 @@ if [ ! -s /usr/bin/mongod ]; then
     
 fi
 
+if [ "$1" = "install" ]; then
+    exit 0
+fi
+
 #### Prepare to start Mongodb ####
 MONGODB_DIR=$HOME/mongodb
 mkdir -p $HOME/mongodb
-nohup mongod --dbpath ${MONGODB_DIR) 2>&1 > $HOME/logs/$(basename $0).log &
+
+RUN=${1:1}
+if [ ${RUN} -gt 0 ]; then
+    mkdir -p $HOME/logs
+    nohup mongod --dbpath ${MONGODB_DIR} 2>&1 > $HOME/logs/$(basename $0).log &
+fi
 
 ## not work inside Docker Container: Use the above steps
 #sudo service mongod start

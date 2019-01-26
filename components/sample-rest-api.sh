@@ -1,20 +1,24 @@
 #!/bin/bash -x
 
-if [ ! -s $HOME/$(basename $0).installed ]; then
+# Ref: 
+# - https://github.com/DrSnowbird/rest
+# - https://github.com/diegohaz/rest
+
+if [ "$1" = "install" ]; then
 
     mkdir -p $HOME/samples
     cd $HOME/samples
 
     mkdir restful
     cd restful/
-    sudo npm isntall -g yo generator-rest eslint
-
-    mkdir my-api
-    cd my-api/
-    yo rest
-    
-    touch $HOME/$(basename $0).installed
-else
-    echo "... Installed before already! ..."
+    sudo npm install -g yo generator-rest eslint
+    sudo chown -R $USER:$(id -gn $USER) $HOME/.config
+    exit 0
 fi
+
+echo "... use yo to generate your project."
+mkdir my-rest-api
+cd my-rest-api/
+yo rest
+
 

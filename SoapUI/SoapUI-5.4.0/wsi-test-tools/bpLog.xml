@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="xsl/log.xsl" type="text/xsl" ?>
+<log timestamp="2008-10-13T10:56:23.796"
+    xmlns="http://www.ws-i.org/testing/2005/01/log/"
+    xmlns:wsi-log="http://www.ws-i.org/testing/2005/01/log/"
+    xmlns:wsi-monConfig="http://www.ws-i.org/testing/2004/07/monitorConfig/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <monitor version="1.0" releaseDate="2003-10-02">
+    <implementer name="Web Services Interoperability Organization" location="http://www.ws-i.org/implementation.aspx"/>
+    <environment>
+      <runtime name="Java(TM) 2 Runtime Environment, Standard Edition" version="1.5.0_12-b04"/>
+      <operatingSystem name="Windows XP" version="5.1"/>
+      <xmlParser name="Apache Xerces" version="unknown"/>
+    </environment>
+    <wsi-monConfig:configuration>
+    <wsi-monConfig:comment>This sample configuration file is used to monitor activity on port 8080.</wsi-monConfig:comment>
+      <wsi-monConfig:logFile replace="true" location="bpLog.xml">
+      <wsi-monConfig:addStyleSheet href="xsl/log.xsl" type="text/xsl" />
+    </wsi-monConfig:logFile>
+      <wsi-monConfig:logDuration>600</wsi-monConfig:logDuration>
+      <wsi-monConfig:cleanupTimeoutSeconds>3</wsi-monConfig:cleanupTimeoutSeconds>
+      <wsi-monConfig:manInTheMiddle>
+        <wsi-monConfig:redirect>
+    <wsi-monConfig:comment>This redirects activity from port 8080 to port 9080.</wsi-monConfig:comment>
+
+          <wsi-monConfig:listenPort>8080</wsi-monConfig:listenPort>
+          <wsi-monConfig:schemeAndHostPort>http://localhost:9080</wsi-monConfig:schemeAndHostPort>
+          <wsi-monConfig:maxConnections>1000</wsi-monConfig:maxConnections>
+          <wsi-monConfig:readTimeoutSeconds>30</wsi-monConfig:readTimeoutSeconds>
+        </wsi-monConfig:redirect>
+      </wsi-monConfig:manInTheMiddle>
+    </wsi-monConfig:configuration>
+  </monitor>
+
+  <messageEntry xsi:type="wsi-log:httpMessageEntry" ID="1" conversationID="1" type="request" timestamp="2008-10-13T10:56:39.296">
+    <messageContent>&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soapenv:Body&gt;&lt;rpcOp:RetBool xmlns:rpcOp=&quot;http://tempuri.org/&quot;&gt;&lt;inBool xmlns:ns2=&quot;http://schemas.example.com/2003/10/Serialization/&quot;&gt;true&lt;/inBool&gt;&lt;/rpcOp:RetBool&gt;&lt;/soapenv:Body&gt;&lt;/soapenv:Envelope&gt;</messageContent>
+    <senderHostAndPort>127.0.0.1:1075</senderHostAndPort>
+    <receiverHostAndPort>localhost:9080</receiverHostAndPort>
+    <httpHeaders>POST /soap11simple/BaseDataTypesRpcLitService HTTP/1.1
+Host: localhost:8080
+Accept: application/soap+xml,multipart/related,text/*
+User-Agent: IBM WebServices/1.0
+Cache-Control: no-cache
+Pragma: no-cache
+SOAPAction: &quot;http://tempuri.org/IBaseDataTypesRpcLit/RetBool&quot;
+Connection: Keep-Alive
+SAVECONNECTION: 18248122281223913399156
+Content-Type: text/xml; charset=UTF-8
+Content-Length: 272
+Date: Mon, 13 Oct 2008 15:56:39 GMT
+
+</httpHeaders>
+  </messageEntry>
+  <messageEntry xsi:type="wsi-log:httpMessageEntry" ID="2" conversationID="1" type="response" timestamp="2008-10-13T10:56:39.437">
+    <messageContent>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soapenv:Body&gt;&lt;rpcOp:RetBoolResponse xmlns:rpcOp=&quot;http://tempuri.org/&quot;&gt;&lt;RetBoolResult&gt;true&lt;/RetBoolResult&gt;&lt;/rpcOp:RetBoolResponse&gt;&lt;/soapenv:Body&gt;&lt;/soapenv:Envelope&gt;</messageContent>
+    <senderHostAndPort>localhost:9080</senderHostAndPort>
+    <receiverHostAndPort>127.0.0.1:1075</receiverHostAndPort>
+    <httpHeaders>HTTP/1.1 200 OK
+Content-Type: text/xml; charset=UTF-8
+Content-Language: en-US
+Content-Length: 278
+Date: Mon, 13 Oct 2008 15:56:39 GMT
+Server: WebSphere Application Server/7.0
+
+</httpHeaders>
+  </messageEntry>
+</log>

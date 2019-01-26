@@ -1,0 +1,2718 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/assertions.xsl"?>
+<!-- 
+	Basic Security Profile Test Assertion Document (TAD)
+	
+	
+	Copyright (c) 2007 by The Web Services-Interoperability Organization (WS-I) and 
+	Certain of its Members. All Rights Reserved.
+	
+	Notice
+	The material contained herein is not a license, either expressly or impliedly, to any 
+	intellectual property owned or controlled by any of the authors or developers of this 
+	material or WS-I. The material contained herein is provided on an "AS IS" basis and to 
+	the maximum extent permitted by applicable law, this material is provided AS IS AND WITH 
+	ALL FAULTS, and the authors and developers of this material and WS-I hereby disclaim all 
+	other warranties and conditions, either express, implied or statutory, including, but not 
+	limited to, any (if any) implied warranties, duties or conditions of  merchantability, 
+	of fitness for a particular purpose, of accuracy or completeness of responses, of results, 
+	of workmanlike effort, of lack of viruses, and of lack of negligence. ALSO, THERE IS NO 
+	WARRANTY OR CONDITION OF TITLE, QUIET ENJOYMENT, QUIET POSSESSION, CORRESPONDENCE TO 
+	DESCRIPTION OR NON-INFRINGEMENT WITH REGARD TO THIS MATERIAL.
+	
+	IN NO EVENT WILL ANY AUTHOR OR DEVELOPER OF THIS MATERIAL OR WS-I BE LIABLE TO ANY OTHER 
+	PARTY FOR THE COST OF PROCURING SUBSTITUTE GOODS OR SERVICES, LOST PROFITS, LOSS OF USE, 
+	LOSS OF DATA, OR ANY INCIDENTAL, CONSEQUENTIAL, DIRECT, INDIRECT, OR SPECIAL DAMAGES 
+	WHETHER UNDER CONTRACT, TORT, WARRANTY, OR OTHERWISE, ARISING IN ANY WAY OUT OF THIS OR 
+	ANY OTHER AGREEMENT RELATING TO THIS MATERIAL, WHETHER OR NOT SUCH PARTY HAD ADVANCE 
+	NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
+	
+	WS-I License Information
+	Use of this WS-I Material is governed by the WS-I Test License and other licenses.  Information on these 
+	licenses are contained in the README.txt and ReleaseNotes.txt files.  By downloading this file, you agree 
+	to the terms of these licenses.
+	
+	How To Provide Feedback
+	The Web Services-Interoperability Organization (WS-I) would like to receive input, 
+	suggestions and other feedback ("Feedback") on this work from a wide variety of 
+	industry participants to improve its quality over time. 
+	
+	By sending email, or otherwise communicating with WS-I, you (on behalf of yourself if 
+	you are an individual, and your company if you are providing Feedback on behalf of the 
+	company) will be deemed to have granted to WS-I, the members of WS-I, and other parties 
+	that have access to your Feedback, a non-exclusive, non-transferable, worldwide, perpetual, 
+	irrevocable, royalty-free license to use, disclose, copy, license, modify, sublicense or 
+	otherwise distribute and exploit in any manner whatsoever the Feedback you provide regarding 
+	the work. You acknowledge that you have no expectation of confidentiality with respect to 
+	any Feedback you provide. You represent and warrant that you have rights to provide this 
+	Feedback, and if you are providing Feedback on behalf of a company, you represent and warrant 
+	that you have the rights to provide Feedback on behalf of your company. You also acknowledge 
+	that WS-I is not required to review, discuss, use, consider or in any way incorporate your 
+	Feedback into future versions of its work. If WS-I does incorporate some or all of your 
+	Feedback in a future version of the work, it may, but is not obligated to include your name 
+	(or, if you are identified as acting on behalf of your company, the name of your company) on 
+	a list of contributors to the work. If the foregoing is not acceptable to you and any company 
+	on whose behalf you are acting, please do not provide any Feedback.
+	
+	WS-I members should direct feedback on this document to wsi_testing@lists.ws-i.org; 
+	non-members should direct feedback to wsi-tools@ws-i.org.  
+-->
+<profileAssertions date="2009-10-22"
+	name="Basic Security Profile [1.1] Test Assertions" status="WGD" version="1.1"
+	xmlns="http://www.ws-i.org/testing/2004/07/assertions/"
+	xmlns:wsi-common="http://www.ws-i.org/testing/2003/03/common/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="../schemas/assertions.xsd">
+	<description>
+		This document contains the test assertions for the WS-I Basic Security
+		Profile definition. These test assertions are used by the analyzer
+		testing tool to determine if a Web service is conformant to the Basic
+		Security Profile.
+	</description>
+	<conventions>
+		The labels used for entry types in this document map one-to-one with the
+		conformance targets from the profile document, but use a different
+		convention for capitalization. For example, the conformance target
+		SECURITY_HEADER corresponds to the entry type securityHeader.
+	</conventions>
+	<namespaces>
+		<namespace prefix="soap">
+			http://schemas.xmlsoap.org/soap/envelope/
+		</namespace>
+		<namespace prefix="dsig">http://www.w3.org/2000/09/xmldsig#</namespace>
+		<namespace prefix="xenc">http://www.w3.org/2001/04/xmlenc#</namespace>
+		<namespace prefix="wsse">
+			http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+		</namespace>
+		<namespace prefix="wsse11">
+			http://docs.oasis-open.org/wss/oasis-wsswssecurity-secext-1.1.xsd
+		</namespace>
+		<namespace prefix="wsu">
+			http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+		</namespace>
+		<namespace prefix="saml">
+			urn:oasis:names:tc:SAML:1.0:assertion
+		</namespace>
+		<namespace prefix="rel">urn:mpeg:mpeg21:2003:01-REL-R-NS</namespace>
+	</namespaces>
+	<profileList>
+		<profile id="BSP1"
+			location="http://www.ws-i.org/Profiles/BasicSecurityProfile-1.0.html"
+			name="Basic Security Profile" revision="BdAD 19Oct06" version="1.0" />
+		<profile id="SAML"
+			location="http://www.ws-i.org/Profiles/BasicSecurityProfile-1.0.html"
+			name="Basic Security Profile" revision="BdAD 19Oct06" version="1.0" />
+		<profile id="KERB"
+			location="http://www.ws-i.org/Profiles/BasicSecurityProfile-1.0.html"
+			name="Basic Security Profile" revision="BdAD 19Oct06" version="1.0" />
+		<profile id="RTP1"
+			location="http://www.ws-i.org/Profiles/BasicSecurityProfile-1.0.html"
+			name="Basic Security Profile" revision="BdAD 19Oct06" version="1.0" />
+	</profileList>
+	<editors>
+		<person affiliation="Microsoft Corporation"
+			href="rampo@microsoft.com">
+			Ram Poornalingam
+		</person>
+		<person affiliation="Microsoft Corporation"
+			href="edjohns@microsoft.com">
+			Ed Johns
+		</person>
+		<person affiliation="Microsoft Corporation"
+			href="govindr@microsoft.com">
+			Govind Ramanathan
+		</person>
+		<person affiliation="Optimyz Software, Inc."
+			href="shrikant@optimyz.com">
+			Shrikant Wagh
+		</person>
+		<person affiliation="IBM Corporation" href="lauzond@ca.ibm.com">
+			David Lauzon
+		</person>
+		<person affiliation="IBM Corporation" href="craigcw@us.ibm.com">
+			Craig Chaney
+		</person>
+		<person affiliation="IBM Corporation" href="  	chumbley@us.ibm.com">
+			Robert Chumbley
+		</person>
+	</editors>
+	<contributorText>
+		Keith Stobie (Microsoft Corporation), Martin Gudgin (Microsoft
+		Corporation),
+	</contributorText>
+	<!--  ================ ARTIFACT: secureEnvelope ==================   -->
+	<artifact type="secureEnvelope">
+		<specificationReferenceList>
+			<specification
+				location="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0.pdf"
+				name="Web Services Security: SOAP Message Security" />
+			<specification
+				location="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0.pdf"
+				name="Web Services Security: X.509 Token Profile" />
+			<specification
+				location="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0.pdf"
+				name="Web Services Security: Username Token Profile" />
+			<specification location="http://www.w3.org/TR/xmldsig-core/"
+				name="XML-Signature Syntax and Processing" />
+			<specification location="http://www.w3.org/TR/xmlenc-core/"
+				name="XML Encryption Syntax and Processing" />
+			<specification
+				location="http://docs.oasis-open.org/wss/oasis-wss-kerberos-token-profile-1.1.pdf"
+				name="Web Services Security: Kerberos Token Profile" />
+			<specification
+				location="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.0.pdf"
+				name="Web Services Security: SAML Token Profile" />
+			<specification
+				location="http://docs.oasis-open.org/wss/oasis-wss-rel-token-profile-1.0.pdf"
+				name="Web Services Security: Rights Expression Language (REL) Token Profile" />
+		</specificationReferenceList>
+		<description>
+			The Basic Security Profile 1.0 requires support for SOAP 1.1 and
+			HTTP 1.0 or 1.1.
+		</description>
+		<testAssertion enabled="true" entryType="anySecureEnvelope" id="BSP5607"
+			type="required">
+			<context>
+				For any secureEnvelope containing an encryptedKey or
+				encryptedData.
+			</context>
+			<assertionDescription>
+				&quot;boolean(./self::soap:Envelope[soap:Header])=true() and
+				boolean(./self::soap:Envelope[soap:Body])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A soap:Envelope containing encryption is not a valid SOAP
+				envelope.
+			</failureMessage>
+			<failureDetailDescription>
+				The soap:Envelope in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5607</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6515&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="anySecureEnvelope" id="BSP3204"
+			type="required">
+			<context>For any secureEnvelope.</context>
+			<assertionDescription>
+				No two &quot;./self::soap:Envelope//*[@wsu:Id]&quot; attributes
+				have the same value.
+			</assertionDescription>
+			<failureMessage>
+				Two wsu:Id attributes within a soap:Envelope have the same
+				value.
+			</failureMessage>
+			<failureDetailDescription>
+				The soap:Envelope in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3204</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6019&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="soapHeader" id="BSP3206"
+			type="required">
+			<context>For any soapHeader.</context>
+			<assertionDescription>
+				&quot;count(./self::soap:Header/wsse:Security[count(@soap:actor)=0])&lt;=1&quot;
+			</assertionDescription>
+			<failureMessage>
+				More than one wsse:Security block exists in a soap:Header with
+				the actor attribute omitted (i.e., it is the case that
+				&quot;count(./self::soap:Header/wsse:Security[count(@soap:actor)=0])&gt;1&quot;.
+			</failureMessage>
+			<failureDetailDescription>
+				The soap:Header element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3206</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6020&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="soapHeader" id="BSP3210"
+			type="required">
+			<context>For any soapHeader.</context>
+			<assertionDescription>
+				All ./self::soap:Header/wsse:Security/@soap:actor are unique.
+			</assertionDescription>
+			<failureMessage>
+				Two or more wsse:Security elements are present in the
+				soap:Header with the same value for the actor attribute.
+			</failureMessage>
+			<failureDetailDescription>
+				The soap:Header element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3210</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6021&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="securityHeader" id="BSP3227"
+			type="required">
+			<context>For any securityHeader.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:Security[count(wsu:Timestamp)&gt;1])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Security contains more than one wsu:Timestamp (i.e. it is
+				the case that ./self::wsse:Security[count(wsu:Timestamp)&gt;1]).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Security element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3227</reference>
+			</referenceList>
+			<comments />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="timestamp" id="BSP3203"
+			type="required">
+			<context>For any timestamp.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsu:Timestamp[count(wsu:Created)=1])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Timestamp element does NOT contain exactly one wsu:Created
+				child element (i.e., it is the case that
+				&quot;./self::wsu:Timestamp[count(wsu:Created)!=1]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Timestamp element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3203</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6006&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="timestamp" id="BSP3224"
+			type="required">
+			<context>For any timestamp.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsu:Timestamp[count(wsu:Expires)&gt;1])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Timestamp element contains more than one wsu:Expires child
+				element (i.e., it is the case that
+				&quot;./self::wsu:Timestamp[count(wsu:Expires)&gt;1]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Timestamp element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3224</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="timestamp" id="BSP3221"
+			type="required">
+			<context>For any timestamp that contains an expires.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsu:Timestamp/wsu:Expires/preceding-sibling::*=./self::wsu:Timestamp/wsu:Created)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				wsu:Created and wsu:Expires elements appear in an improper order
+				within a wsu:Timestamp element.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Timestamp element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3203</testAssertionID>
+				<testAssertionID>BSP3224</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3221</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="timestamp" id="BSP3222"
+			type="required">
+			<context>For any timestamp</context>
+			<assertionDescription>
+				&quot;count(./self::wsu:Timestamp/wsu:Created)+count(./self::wsu:Timestamp/wsu:Expires)=count(./self::wsu:Timestamp/*)&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Timestamp contains child elements other than wsu:Created
+				or wsu:Expires.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Timestamp element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3222</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="created" id="BSP3220"
+			type="recommended">
+			<context>For any created.</context>
+			<assertionDescription>
+				&quot;seconds-from-duration(./self::wsu:Created/text()) should
+				not contain more than 3 digits to right of decimal.&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Created element contains more than three digits to the
+				right of decimal.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Created element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3217</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3220</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="expires" id="BSP3229"
+			type="recommended">
+			<context>For any expired.</context>
+			<assertionDescription>
+				&quot;seconds-from-duration(./self::wsu:Expires/text()) should
+				not contain more than 3 digits to right of decimal.&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Expires element contains more than three digits to the
+				right of decimal.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Expires element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3223</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3229</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="created" id="BSP3213"
+			type="required">
+			<context>For any created that contains second values.</context>
+			<assertionDescription>
+				&quot;seconds-from-duration(./self::wsu:Created/text()) &lt;
+				60&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Created element has a seconds value greater than or equal
+				to 60.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Created element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3217</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3213</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6012&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="expires" id="BSP3215"
+			type="required">
+			<context>For any expires that contains second values.</context>
+			<assertionDescription>
+				&quot;seconds-from-duration(./self::wsu:Expires/text()) &lt;
+				60&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Expires element has a seconds value greater than or equal
+				to 60.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Expires element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3223</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3215</reference>
+			</referenceList>
+			<comments />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="created" id="BSP3225"
+			type="required">
+			<context>For any created.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsu:Created/@ValueType)=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Created element contains a ValueType attribute (i.e. it is
+				the case that ./self::wsu:Created/@ValueType).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Created element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3225</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="expires" id="BSP3226"
+			type="required">
+			<context>For any expires.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsu:Expires/@ValueType)=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Expires element contains a ValueType attribute (i.e. it is
+				the case that ./self::wsu:Expires/@ValueType).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Expires element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3226</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="created" id="BSP3217"
+			type="required">
+			<context>For any created.</context>
+			<assertionDescription>
+				The time value is in UTC format as specified by the XML Schema
+				type (dateTime).
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Created element does NOT contain time instants in UTC
+				format as specified by the XML Schema type (dateTime).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Created element(s) in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3217</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6013&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="expires" id="BSP3223"
+			type="required">
+			<context>For any expires.</context>
+			<assertionDescription>
+				The time value is in UTC format as specified by the XML Schema
+				type (dateTime).
+			</assertionDescription>
+			<failureMessage>
+				A wsu:Expires element does NOT contain time instants in UTC
+				format as specified by the XML Schema type (dateTime).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsu:Expires element(s) in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3223</reference>
+			</referenceList>
+			<comments />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strReference" id="BSP3057"
+			type="required">
+			<context>For any strReference.</context>
+			<assertionDescription>
+				The //[@wsu:Id=./self::wsse:Reference/@URI] is not a
+				wsse:SecurityTokenReference element.
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Reference element references a
+				wsse:SecurityTokenReference.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Reference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3062</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3057</reference>
+			</referenceList>
+			<comments />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strReference" id="BSP3064"
+			type="required">
+			<context>For any strReference.</context>
+			<assertionDescription>
+				The //[@wsu:Id=./self::wsse:Reference/@URI] is not a
+				wsse:Embedded element.
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Reference element references a wsse:Embedded.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Reference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3062</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3064</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6608&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strReference" id="BSP3059"
+			type="required">
+			<context>For any strReference.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:Reference/@ValueType)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Reference element does NOT contain a ValueType attribute
+				(i.e., it is NOT the case that
+				&quot;./self::wsse:Reference/@ValueType&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Reference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3059</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6201&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strReference" id="BSP3062"
+			type="required">
+			<context>For any strReference.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:Reference/@URI)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Reference element does NOT have a URI attribute (i.e., it
+				is NOT the case that &quot;./self::wsse:Reference/@URI&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Reference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3062</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6202&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="securityTokenReference"
+			id="BSP3027" type="required">
+			<context>For any securityTokenReference.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:SecurityTokenReference[ds:KeyName])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:SecurityTokenReference contains an ds:KeyName (i.e., it
+				is the case that
+				&quot;./self::wsse:SecurityTokenReference[ds:KeyName]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:SecurityTokenReference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3027</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6004&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strKeyIdentifier" id="BSP3054"
+			type="required">
+			<context>For any strKeyIdentifier.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:KeyIdentifier[@ValueType])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:KeyIdentifier element does NOT contain a ValueType
+				attribute (i.e., it is NOT the case that
+				&quot;./self::wsse:KeyIdentifier[@ValueType]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:KeyIdentifier element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3054</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6003&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strKeyIdentifier" id="BSP3070"
+			type="required">
+			<context>
+				For any strKeyIdentifier that refers to a securityToken other
+				than a samlToken.
+			</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:KeyIdentifier[@EncodingType])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:KeyIndetifier element does NOT contain a EncodingType
+				attribute (i.e., it is NOT the case that
+				&quot;./self::wsse:KeyIdentifier[@EncodingType]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:KeyIdentifier element in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3070</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strKeyIdentifier" id="BSP3071"
+			type="required">
+			<context>For any strKeyIdentifier that has an EncodingType attribute.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:KeyIdentifier[@EncodingType='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary'])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:KeyIdentifier element contains an EncodingType attribute
+				that does NOT have a value of
+				&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary&quot;
+				(i.e., it is NOT the case that
+				&quot;./self::wsse:KeyIdentifier[@EncodingType='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary']&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:KeyIdentifier element in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3070</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3071</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strEmbedded" id="BSP3060"
+			type="required">
+			<context>For any strEmbedded.</context>
+			<assertionDescription>
+				&quot;count(./self::wsse:Embedded/*)=1&quot; AND the child is an
+				internalSecurityToken.
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Embedded element has zero or more than one security token
+				child element (i.e. it is not the case that
+				count(./self::wsse:Embedded/*)=1)
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Embedded element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3060</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6606&quot;.</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strEmbedded" id="BSP3056"
+			type="required">
+			<context>For any strEmbedded.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:Embedded[wsse:SecurityTokenReference])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Embedded element contains a wsse:SecurityTokenReference
+				child element (i.e. it is the case that
+				./self::wsse:Embedded[wsse:SecurityTokenReference]).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Embedded element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3056</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6604&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strReference" id="BSP3066"
+			type="required">
+			<context>
+				For any strReference that is a descendant of a securityHeader.
+			</context>
+			<assertionDescription>
+				For __thisURI = &quot;./self::wsse:Reference/@URI&quot;
+				&quot;boolean(./self::wsse:Reference/ancestor::wsse:Security=//*[concat('#',@wsu:Id)=__thisURI]/ancestor::wsse:Security)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Reference uses a shorthand XPointer does not
+				reference any security tokens located in the same wsse:Security
+				element.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Reference in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3062</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3066</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6420&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strReference" id="BSP3067"
+			type="required">
+			<context>
+				For any strReference that is a descendant of an encryptedData.
+			</context>
+			<assertionDescription>
+				The wsse:Reference must not use a Shorthand XPointer to refer to
+				a security token located in a wsse:Security element other than
+				the wsse:Security element containing  a reference to the
+				xenc:Encrypted element that contains the wsse:Reference.
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Reference uses a shorthand XPointer does not reference
+				any security tokens located in the wsse:Security element that
+				contains a reference to the wsse:Reference's containing
+				xenc:Encrypted.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Reference in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3062</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3067</reference>
+			</referenceList>
+			<comments/>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="signature" id="BSP3102"
+			type="required">
+			<context>For any signature.</context>
+			<assertionDescription>
+				For
+				__thisURI=&quot;./self::ds:Signature/ds:SignedInfo/ds:Reference/@URI&quot;
+				&quot;boolean(./self::ds:Signature//*[concat('#',@Id)=__thisURI])=false&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Signature element includes an Enveloping Signature.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Signature element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3102</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6609&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="signature" id="BSP3104"
+			type="recommended">
+			<context>For any signature.</context>
+			<assertionDescription>
+				For
+				__thisURI=&quot;./self::ds:Signature/ds:SignedInfo/ds:Reference/@URI&quot;
+				&quot;boolean(./ancestor::ds:Signature[concat('#',@Id)=__thisURI]=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Signature element is an Enveloped Signature.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Signature element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3104</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="signature" id="BSP3103"
+			type="recommended">
+			<context>For any signature.</context>
+			<assertionDescription>
+				For
+				__thisURI=&quot;./self::ds:Signature/ds:SignedInfo/ds:Reference/@URI&quot;
+				&quot;boolean(/soap:Envelope//*[concat('#',@Id)=__thisURI]/self::ds:Signature/ds:SignedInfo/ds:Reference/@URI=__thisURI)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Signature element is not a Detached Signature.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Signature element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3103</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="sigReference" id="BSP3001"
+			type="recommended">
+			<context>For any sigReference.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:Reference/@URI)=true()&quot; and the
+				value ./self::ds:Reference/@URI is a Shorthand XPointer
+				Reference.
+			</assertionDescription>
+			<failureMessage>
+				A ds:Reference element does not contain URI attribute (i.e., it
+				is NOT the case that
+				&quot;boolean(./self::ds:Reference/@URI)=true()&quot;) or the
+				value ./self:ds:Reference/@URI is not Shorthand XPointer
+				Reference.
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:Reference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3001</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="sigReference" id="BSP5416"
+			type="required">
+			<context>For any sigReference.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:Reference/ds:Transforms)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:Reference element does NOT contain a ds:Transforms child
+				element (i.e., it is NOT the case that
+				&quot;./self::ds:Reference/ds:Transforms&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:Reference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5416</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="sigTransforms" id="BSP5411"
+			type="required">
+			<context>For any sigTransforms.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:Transforms[count(ds:Transform)&gt;=1])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:Transforms elements in the signature does NOT contain a
+				ds:Transform child element (i.e., it is NOT the case that
+				&quot;./self::ds:Transforms/ds:Transform&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:Transforms element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5411</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6406&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="sigTransform" id="BSP5423"
+			type="required">
+			<context>For any sigTransform with an Algorithm attribute.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:Transform[
+				@Algorithm='http://www.w3.org/2001/10/xml-exc-c14n#' or
+				@Algorithm='http://www.w3.org/2002/06/xmldsig-filter2' or
+				@Algorithm='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#STR-Transform'
+				or
+				@Algorithm='http://www.w3.org/2000/09/xmldsig#enveloped-signature'
+				or
+				@Algorithm='http://docs.oasis-open.org/wss/oasis-wss-SwAProfile-1.1#Attachment-Content-Signature-Transform'
+				or
+				@Algorithm='http://docs.oasis-open.org/wss/oasis-wss-SwAProfile-1.1#Attachment-Complete-Signature-Transform'])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:Transform/@Algorithm attribute in a signature has a value
+				other than those specified in the profile (i.e., it is NOT the
+				case that &quot;./self::ds:Transform[
+				@Algorithm='http://www.w3.org/2001/10/xml-exc-c14n#' or
+				@Algorithm='http://www.w3.org/2002/06/xmldsig-filter2' or
+				@Algorithm='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#STR-Transform'
+				or
+				@Algorithm='http://www.w3.org/2000/09/xmldsig#enveloped-signature'
+				or
+				@Algorithm='http://docs.oasis-open.org/wss/oasis-wss-SwAProfile-1.1#Attachment-Content-Signature-Transform'
+				or
+				@Algorithm='http://docs.oasis-open.org/wss/oasis-wss-SwAProfile-1.1#Attachment-Complete-Signature-Transform'])&quot;.
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:Transform elements in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5423</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6409&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="sigTransforms" id="BSP5412"
+			type="required">
+			<context>For any sigTransforms.</context>
+			<assertionDescription>
+				&quot;./self::ds:Transforms/child::*[last()]=./self::ds:Transforms/child::ds:Transform[last()]
+				and boolean(./self::ds:Transforms/child::*[last()]
+				[@Algorithm='http://www.w3.org/2001/10/xml-exc-c14n#' or
+				@Algorithm='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#STR-Transform'
+				or
+				@Algorithm='http://docs.oasis-open.org/wss/2004/XX/oasis-2004XX-wss-swa-profile-1.0#Attachment-Content-Signature-Transform'
+				or
+				@Algorithm='http://docs.oasis-open.org/wss/2004/XX/oasis-2004XX-wss-swa-profile-1.0#Attachment-Complete-Signature-Transform'])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:Transforms element in the signature does NOT have a
+				ds:Transform element as its last child or the ds:Transform
+				Element contains an Agorithm attribute is not one of
+				&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot; or
+				&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#STR-Transform&quot;
+				or
+				&quot;http://docs.oasis-open.org/wss/2004/XX/oasis-2004XX-wss-swa-profile-1.0#Attachment-Content-Signature-Transform&quot;
+				or
+				&quot;http://docs.oasis-open.org/wss/2004/XX/oasis-2004XX-wss-swa-profile-1.0#Attachment-Complete-Signature-Transform&quot;
+				(i.e., it is NOT the case that
+				&quot;./self::ds:Transforms/child::*[last()]=./self::ds:Transforms/child::ds:Transform[last()]&quot;
+				or
+				&quot;./sel;f::ds:Transforms/child::*[last()][@Alorithm='http://www.w3.org/2001/10/xml-exc-c14n#'
+				or
+				@Alorithm='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#STR-Transform'
+				or
+				@Alorithm='http://docs.oasis-open.org/wss/2004/XX/oasis-2004XX-wss-swa-profile-1.0#Attachment-Content-Signature-Transform'
+				or
+				@Alorithm='http://docs.oasis-open.org/wss/2004/XX/oasis-2004XX-wss-swa-profile-1.0#Attachment-Complete-Signature-Transform']&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:Transforms element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP5411</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R5412</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="sigTransform" id="BSP3065"
+			type="required">
+			<context>
+				For any sigTransform containing an Algorithm attribute with a
+				value of
+				&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#STR-Transform&quot;.
+			</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:Transform/wsse:TransformationParameters/ds:CanonicalizationMethod)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:Transform element for a Security Token Dereferencing
+				Transform does not contain a wsse:TransformationParameters child
+				element containing a ds:CanonicalizationMethod child element
+				(i.e. it is NOT the case that
+				./self::ds:Transform/wsse:TransformationParameters/ds:CanonicalizationMethod.
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:Transform element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3065</reference>
+			</referenceList>
+			<comments />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="canonicalizationMethod"
+			id="BSP5404" type="required">
+			<context>For any canonicalizationMethod.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:CanonicalizationMethod[@Algorithm='http://www.w3.org/2001/10/xml-exc-c14n#'])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:CanonicalizationMethod/@Algorithm attribute has a value
+				other than &quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;
+				(i.e., it is NOT the case that
+				&quot;./self::ds:CanonicalizationMethod[@Algorithm='http://www.w3.org/2001/10/xml-exc-c14n#']&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:CanonicalizationMethod element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5404</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6407&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="digestMethod" id="BSP5420"
+			type="recommended">
+			<context>For any digestMethod.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:DigestMethod[@Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:DigestMethod element does not contain a Algorithm attribute
+				or the Algorithm attribute does not contain the value
+				&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot; (i.e., it is
+				NOT the case that
+				&quot;boolean(./self::ds:DigestMethod[@Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;])=true()&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:DigestMethod element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5420</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="signatureMethod" id="BSP5421"
+			type="recommended">
+			<context>For any signatureMethod.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:SignatureMethod[@Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#hmac-sha1&quot;
+				or
+				@Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#rsa-sha1&quot;])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:SignatureMethod element does not contain a Algorithm
+				attribute or the Algorithm attribute does not contain the value
+				&quot;http://www.w3.org/2000/09/xmldsig#hmac-sha1&quot; or
+				&quot;http://www.w3.org/2000/09/xmldsig#rsa-sha1&quot; (i.e., it
+				is NOT the case that
+				&quot;boolean(./self::ds:SignatureMethod[@Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#hmac-sha1&quot;
+				or
+				@Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#rsa-sha1&quot;])=true()&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:SignatureMethod element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5421</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="signatureMethod" id="BSP5401"
+			type="required">
+			<context>For any signatureMethod.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:SignatureMethod/ds:HMACOutputLength)=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:SignatureMethod elements contains a ds:HMACOutputLength
+				element as a child element (i.e., it is the case that
+				&quot;./self::ds:SignatureMethod/ds:HMACOutputLength&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:SignatureMethod element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5401</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6410&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="sigKeyInfo" id="BSP5402"
+			type="required">
+			<context>For any sigKeyInfo.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:KeyInfo[count(child::*)=1])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:KeyInfo element in a signature does NOT have exactly one
+				child element (i.e., it is the case that
+				&quot;ds:Signature//ds:KeyInfo[count(child::*)!=1]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:KeyInfo element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5402</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6302&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="sigKeyInfo" id="BSP5417"
+			type="required">
+			<context>For any sigKeyInfo element.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:KeyInfo/wsse:SecurityTokenReference)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:KeyInfo element in a signature does NOT have a
+				wsse:SecurityTokenReference child element (i.e., it is NOT the
+				case that &quot;ds:KeyInfo/wsse:SecurityTokenReference&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:KeyInfo element in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP5402</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R5417</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="signature" id="BSP5403"
+			type="required">
+			<context>For any signature.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:Signature[descendant::ds:Manifest])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:Signature element in the message contains a ds:Manifest
+				element.(i.e., it is the case that
+				&quot;./self::ds:Signature[descendant::ds:Manifest]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:Signature element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5403</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6402&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="signature" id="BSP5440"
+			type="required">
+			<context>For any signature.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:Signature[descendant::xenc:EncryptedData])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:Signature element in the message contains an
+				xenc:EncryptedData element.(i.e., it is the case that
+				&quot;./self::ds:Signature[descendant::xenc:EncryptedData]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:Signature element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5440</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="signatureConfirmation" id="BSP5441"
+			type="required">
+			<context>For any signatureConfirmation.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse11:SignatureConfirmation/@wsu:Id)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse11:SignatureConfirmation element does not contain a wsu:Id attribute.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse11:SignatureConfirmation element in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5441</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>		
+		<testAssertion enabled="true" entryType="encryptedKey" id="BSP3208"
+			type="required">
+			<context>For any encryptedKey.</context>
+			<assertionDescription>
+				For __thisURI =
+				&quot;xenc:EncryptedKey//xenc:ReferenceList/xenc:DataReference/@URI&quot;,
+				&quot;boolean(./self::xenc:EncryptedKey/ancestor::wsse:Security//xenc:EncryptedData[concat('#',@Id)=__thisURI]/preceding-sibling::xenc:EncryptedKey=./self::xenc:EncryptedKey)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				An xenc:EncryptedKey element does not precedes the
+				xenc:EncryptedData element that is referenced by the associated
+				xenc:ReferenceList element specified in the xenc:EncryptedKey.
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedKey element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3208</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6612&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="soapHeader" id="BSP3228"
+			type="required">
+			<context>For any soapHeader.</context>
+			<assertionDescription>
+				&quot;boolean(./self::soap:Header)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A soap:Header element in a secure envelope contains a child xenc:EncryptedData element.
+			</failureMessage>
+			<failureDetailDescription>
+				The soap:Header in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3228</reference>
+			</referenceList>
+			<comments>
+				BSP_11_NEW From the profile text, we could perhaps write this assertion more naturally using either secureEnvelope or soapHeader
+				as the entryType. However, given the difficulty of expressing encryptedData in XPath (taking into account the requirement that it is
+				referenced from an ekReferenceList or encReferenceList), we found it easier to write the assertion this way.
+			</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encryptedHeader" id="BSP3230"
+			type="required">
+			<context>For any encryptedHeader.</context>
+			<assertionDescription>
+				&quot;boolean((./self::wsse11:EncryptedHeader[count(child::*)=1]) and (./self::wsse11:EncryptedHeader/xenc:EncryptedData))=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse11:EncryptedHeader element contains some number of children other than 1, or the child of the wsse11:EncryptedHeader element is not a valid xenc:EncryptedData
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse11:EncryptedHeader in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3230</reference>
+			</referenceList>
+			<comments>
+				BSP_11_NEW
+			</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>						
+		<testAssertion enabled="false" entryType="encryptedKey" id="BSP3216"
+			type="recommended">
+			<context>For any encryptedKey.</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptedKey/xenc:ReferenceList)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				An xenc:EncryptedKey element does not contain xenc:ReferenceList
+				child element.
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedKey element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3216</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encryptedKey" id="BSP3209"
+			type="required">
+			<context>For any encryptedKey.</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptedKey[@Type])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				An xenc:EncryptedKey elements in the security header contains a
+				Type attribute (i.e., it is the case that
+				&quot;./self::xenc:EncryptedKey[@Type]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedKey element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3209</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6507&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encryptedKey" id="BSP5622"
+			type="required">
+			<context>For any encryptedKey.</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptedKey[@MimeType])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				An xenc:EncryptedKey elements in the security header contains a
+				MimeType attribute (i.e., it is the case that
+				&quot;./self::xenc:EncryptedKey[@MimeType]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedKey element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5622</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6512&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encryptedKey" id="BSP5623"
+			type="required">
+			<context>For any encryptedKey.</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptedKey[@Encoding])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				An xenc:EncryptedKey elements in the security header contains a
+				Encoding attribute (i.e., it is the case that
+				&quot;./self::xenc:EncryptedKey[@Encoding]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedKey element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5623</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6513&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encryptedKey" id="BSP5602"
+			type="required">
+			<context>For any encryptedKey.</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptedKey[@Recipient])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				An xenc:EncryptedKey element contains a Recipient attribute
+				(i.e., it is the case that
+				&quot;./self::xenc:EncryptedKey[@Recipient]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedKey element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5602</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6502&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encryptedKey" id="BSP5603"
+			type="required">
+			<context>For any encryptedKey.</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptedKey[xenc:EncryptionMethod])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				An xenc:EncryptedKey element does NOT contain an
+				xenc:EncryptionMethod child element (i.e., it is NOT the case
+				that
+				&quot;./self::xenc:EncryptedKey[xenc:EncryptionMethod]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedKey element in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5603</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6503&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encryptedData" id="BSP5629"
+			type="required">
+			<context>
+				For any encryptedData which is not referenced from an
+				encryptedKey.
+			</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptedData[ds:KeyInfo])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				The xenc:EncryptedData element does not contain a ds:KeyInfo
+				element (i.e. it is NOT the case that
+				&quot;./self::xenc:EncryptedData[ds:KeyInfo]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedData element in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5629</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encryptedData" id="BSP5624"
+			type="required">
+			<context>
+				For any encryptedData in which the parent EncryptedHeader is missing the wsu:Id
+			</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptedData)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				The xenc:EncryptedData is missing the Id attribute
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedData element in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5624</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encryptedData" id="BSP5627"
+			type="required">
+			<context>
+				For any encryptedData in which the Id attribute is missing
+			</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptedData)=true()&quot;			
+			</assertionDescription>
+			<failureMessage>
+				The xenc:EncryptedHeader is missing the wsu:Id attribute
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedData element in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5627</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strKeyIdentifier" id="BSP5206"
+			type="required">
+			<context>
+				For any STR_KEY_IDENTIFIER that references an X509_TOKEN 
+			</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:KeyIdentifier)=true()&quot;			
+			</assertionDescription>
+			<failureMessage>
+				The wsse:KeyIdentifier ValueType attribute is incorrect
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:KeyIdentifier element in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5206</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>														
+		<testAssertion enabled="true" entryType="encryptedData" id="BSP5601"
+			type="required">
+			<context>For any encryptedData.</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptedData[xenc:EncryptionMethod])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				An xenc:EncryptedData element does NOT contain an
+				xenc:EncryptionMethod child element (i.e., it is NOT the case
+				that
+				&quot;./self::xenc:EncryptedData[xenc:EncryptionMethod]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptedData element in question
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5601</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6501&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encKeyInfo" id="BSP5424"
+			type="required">
+			<context>For any encKeyInfo.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:KeyInfo[count(child::*)=1])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:KeyInfo element in an xenc:EncryptedKey does NOT have
+				exactly one child element.(i.e., it is NOT the case that
+				&quot;./self::ds:KeyInfo[count(child::*)=1]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:KeyInfo element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5424</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encKeyInfo" id="BSP5426"
+			type="required">
+			<context>For any encKeyInfo.</context>
+			<assertionDescription>
+				&quot;boolean(./self::ds:KeyInfo[wsse:SecurityTokenReference])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A ds:KeyInfo element in an xenc:EncryptedKey does NOT contain a
+				wsse:SecurityTokenReference child (i.e., it is NOT the case that
+				&quot;./self::ds:KeyInfo[wsse:SecurityTokenReference]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The ds:KeyInfo element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP5424</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R5426</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encDataReference" id="BSP5608"
+			type="required">
+			<context>For any encDataReference.</context>
+			<assertionDescription>
+				./self::xenc:DataReference/@URI contains a Shorthand XPointer
+				reference value based on the ID attribute of the referred to
+				xenc:EncryptedData.
+			</assertionDescription>
+			<failureMessage>
+				An xenc:DataReference refers to an xenc:EncryptedData without
+				using a Shorthand XPointer reference based on its ID attribute.
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:DataReference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5608</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="ekDataReference" id="BSP3006"
+			type="required">
+			<context>For any ekDataReference.</context>
+			<assertionDescription>
+				./self::xenc:DataReference/@URI contains a Shorthand XPointer
+				reference value based on the ID attribute of the referred to
+				xenc:EncryptedData.
+			</assertionDescription>
+			<failureMessage>
+				An xenc:DataReference refers to an xenc:EncryptedData without
+				using a Shorthand XPointer reference based on its ID attribute.
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:DataReference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3006</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="encKeyReference" id="BSP5613"
+			type="required">
+			<context>For any encKeyReference.</context>
+			<assertionDescription>
+				./self::xenc:KeyReference/@URI contains a Shorthand XPointer
+				reference value based on the ID attribute of the referred to
+				xenc:EncryptedKey.
+			</assertionDescription>
+			<failureMessage>
+				An xenc:KeyReference refers to an xenc:EncryptedKey without
+				using a Shorthand XPointer reference based on its ID attribute.
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:KeyReference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5613</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="ekKeyReference" id="BSP3007"
+			type="required">
+			<context>For any ekKeyReference.</context>
+			<assertionDescription>
+				./self::xenc:KeyReference/@URI contains a Shorthand XPointer
+				reference value based on the ID attribute of the referred to
+				xenc:EncryptedKey.
+			</assertionDescription>
+			<failureMessage>
+				An xenc:KeyReference refers to an xenc:EncryptedKey without
+				using a Shorthand XPointer reference based on its ID attribute.
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:KeyReference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3007</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="edEncryptionMethod"
+			id="BSP5620" type="required">
+			<context>For any edEncryptionMethod.</context>
+			<assertionDescription>
+				&quot;boolean(./self::xenc:EncryptionMethod[
+				@Algorithm='http://www.w3.org/2001/04/xmlenc#tripledes-cbc' or
+				@Algorithm='http://www.w3.org/2001/04/xmlenc#aes128-cbc' or
+				@Algorithm='http://www.w3.org/2001/04/xmlenc#aes256-cbc'])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				An xenc:EncryptionMethod contains an Algorithm attribute with a
+				value other than one of
+				&quot;http://www.w3.org/2001/04/xmlenc#tripledes-cbc&quot; or
+				&quot;http://www.w3.org/2001/04/xmlenc#aes128-cbc&quot; or
+				&quot;http://www.w3.org/2001/04/xmlenc#aes256-cbc&quot; (i.e.,
+				it is NOT the case that &quot;./self::xenc:EncryptionMethod[
+				@Algorithm='http://www.w3.org/2001/04/xmlenc#tripledes-cbc' or
+				@Algorithm='http://www.w3.org/2001/04/xmlenc#aes128-cbc' or
+				@Algorithm='http://www.w3.org/2001/04/xmlenc#aes256-cbc']&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The xenc:EncryptionMethod element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5620</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6505&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="ekEncryptionMethod"
+			id="BSP5626" type="required">
+			<context>For any ekEncryptionMethod.</context>
+			<assertionDescription>
+				&quot;boolean(
+				./self::xenc:EncryptionMethod[@Algorithm='http://www.w3.org/2001/04/xmlenc#rsa-1_5'
+				or @Algorithm='http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p'
+				or @Algorithm='http://www.w3.org/2001/04/xmlenc#kw-tripledes' or
+				@Algorithm='http://www.w3.org/2001/04/xmlenc#kw-aes128' or
+				@Algorithm='http://www.w3.org/2001/04/xmlenc#kw-aes256'])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A xenc:EncryptionMethod elements Algorithm attribute contains a
+				value other than
+				&quot;http://www.w3.org/2001/04/xmlenc#rsa-1_5&quot; or
+				&quot;http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p&quot; or
+				&quot;http://www.w3.org/2001/04/xmlenc#kw-tripledes&quot; or
+				&quot;http://www.w3.org/2001/04/xmlenc#kw-aes128&quot; or
+				&quot;http://www.w3.org/2001/04/xmlenc#kw-aes256&quot;.
+			</failureMessage>
+			<failureDetailDescription>
+				The headerElement element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5626</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="headerElement" id="BSP5614"
+			type="required">
+			<context>For any headerElement.</context>
+			<assertionDescription>
+				&quot;count(./self::xenc:EncryptedData)=0&quot;
+			</assertionDescription>
+			<failureMessage>
+				The soap:Header has a xenc:EncryptedData element as its child.
+			</failureMessage>
+			<failureDetailDescription>
+				The headerElement element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5614</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="binarySecurityToken"
+			id="BSP3029" type="required">
+			<context>For any binarySecurityToken.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:BinarySecurityToken[@EncodingType])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:BinarySecurityToken does NOT contain a EncodingType
+				attribute (i.e., it is NOT the case that
+				&quot;./self::wsse:BinarySecurityToken[@EncodingType]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:BinarySecurityToken element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3029</reference>
+			</referenceList>
+			<comments>old id=&quot;BSP6001&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="binarySecurityToken"
+			id="BSP3030" type="required">
+			<context>For any binarySecurityToken.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:BinarySecurityToken[@EncodingType='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary'])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:BinarySecurity tokens contains an EncodingType attribute
+				with a value other than
+				&quot;http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd#Base64Binary&quot;
+				(i.e., it is NOT the case that
+				&quot;./self::wsse:BinarySecurityToken[@EncodingType='http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd#Base64Binary']&quot;.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:BinarySecurityToken element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3029</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3030</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6007&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="binarySecurityToken"
+			id="BSP3031" type="required">
+			<context>For any binarySecurityToken.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:BinarySecurityToken[@ValueType])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:BinarySecurityToken does NOT contain a ValueType
+				attribute (i.e., it is NOT the case that
+				&quot;./self::wsse:BinarySecurityToken[@ValueType]&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:BinarySecurityToken element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R3031</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6002&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="binarySecurityToken"
+			id="BSP3032" type="required">
+			<context>For any binarySecurityToken.</context>
+			<assertionDescription>
+				./self::wsse:BinarySecurityToken/@ValueType has a value
+				specified by a related security token profile.
+			</assertionDescription>
+			<failureMessage>
+				A wsse:BinarySecurityToken element has a ValueType attribute
+				whose value is outside the defined token profiles.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:BinarySecurityToken element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3031</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R3032</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6603&quot;.</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="usernameToken" id="BSP4222"
+			type="required">
+			<context>For any usernameToken.</context>
+			<assertionDescription>
+				&quot;count(./self::wsse:UsernameToken/wsse:Password)&lt;=1&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:UsernameToken element contains more than one
+				wsse:Password (i.e., it is NOT the case that
+				&quot;count(./self::wsse:UsernameToken/wsse:Password)&lt;=1&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:UsernameToken element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R4222</reference>
+			</referenceList>
+			<comments />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="password" id="BSP4201"
+			type="required">
+			<context>For any password.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:Password/@Type)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Password element does NOT contain a Type attribute (i.e.,
+				it is NOT the case that
+				&quot;./self::wsse:Password/@Type&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Password element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R4201</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6005&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="usernameToken" id="BSP4223"
+			type="required">
+			<context>For any usernameToken.</context>
+			<assertionDescription>
+				&quot;count(./self::wsse:UsernameToken/wsu:Created)&lt;=1&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:UsernameToken element contains more than one wsu:Created
+				(i.e., it is NOT the case that
+				&quot;count(./self::wsse:UsernameToken/wsu:Created)&lt;=1&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:UsernameToken element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R4223</reference>
+			</referenceList>
+			<comments />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="usernameToken" id="BSP4225"
+			type="required">
+			<context>For any usernameToken.</context>
+			<assertionDescription>
+				&quot;count(./self::wsse:UsernameToken/wsse:Nonce)&lt;=1&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:UsernameToken element contains more than one wsse:Nonce
+				(i.e., it is NOT the case that
+				&quot;count(./self::wsse:UsernameToken/wsse:Nonce)&lt;=1&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:UsernameToken element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R4225</reference>
+			</referenceList>
+			<comments />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="nonce" id="BSP4220"
+			type="required">
+			<context>For any nonce.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:Nonce/@EncodingType)=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Nonce does NOT contain an EncodingType attribute (i.e, it
+				is NOT the case that
+				&quot;./self::wsse:Nonce/@EncodingType&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Nonce element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R4220</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="nonce" id="BSP4221"
+			type="required">
+			<context>For any nonce.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:Nonce[@EncodingType='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary'])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Nonce contains an EncodingType attribute that does NOT
+				have a value
+				&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary&quot;
+				(i.e., it is NOT the case that
+				&quot;./self::wsse:Nonce[@EncodingType='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary']&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Nonce element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP4220</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R4221</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ram Poornalingam"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strReference" id="BSP4214"
+			type="required">
+			<context>For any strReference to a usernameToken.</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:Reference[@ValueType='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#UsernameToken'])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Reference element that refers to a wsse:UsernameToken
+				does not have a ValueType attribute of
+				&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#UsernameToken&quot;
+				(i.e., it is NOT the case that
+				&quot;./self::wsse:Reference[@ValueType='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#UsernameToken'&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Reference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList>
+				<testAssertionID>BSP3059</testAssertionID>
+			</prereqList>
+			<referenceList>
+				<reference profileID="BSP1">R4214</reference>
+			</referenceList>
+			<comments>
+				Because of R5204, we can assume that the strReference uses a
+				Shorthand XPointer URI, and so we can always determine if a
+				strReference references a usernameToken.
+			</comments>
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strReference" id="BSP6301"
+			type="required">
+			<context>
+				For any strReference that refers to an internalSecurityToken
+				that is an relToken containing a wsu:Id attribute.
+			</context>
+			<assertionDescription>
+				&quot;starts-with(./self::wsse:Reference/@URI, '#') =
+				true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:Reference element that refers to an rel:license element
+				can use the shorthand XPointer format but does not.
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:Reference element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="RTP1">R6301</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="" status="new"
+				testCasesCompleted="No" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strKeyIdentifier" id="BSP6602"
+			type="required">
+			<context>
+				For any strKeyIdentifier that references an internalSamlToken.
+			</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:KeyIdentifier[@ValueType])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:KeyIdentifier element that references an
+				internalSamlToken does not contain a ValueType attribute (i.e.
+				it is NOT the case that ./self::wsse:KeyIdentifier[@ValueType]).
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:KeyIdentifier element in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="SAML">R6602</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="" status="new"
+				testCasesCompleted="yes" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="strKeyIdentifier" id="BSP6604"
+			type="required">
+			<context>
+				For Any strKeyIdentifier that references a samlToken.
+			</context>
+			<assertionDescription>
+				&quot;boolean(./self::wsse:KeyIdentifier[@EncodingType])=false()&quot;
+			</assertionDescription>
+			<failureMessage>
+				A wsse:KeyIdentifier that references a saml:Assertion includes
+				an EncodingType attribue (i.e., it IS the case that
+				&quot;boolean(./self::wsse:KeyIdentifier[@EncodingType])=false()&quot;
+			</failureMessage>
+			<failureDetailDescription>
+				The wsse:KeyIdentifier in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="SAML">R6604</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="" status="new"
+				testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="samlAuthorityBinding"
+			id="BSP6607" type="required">
+			<context>
+				For any samlAuthorityBinding that contains an AuthorityKind
+				attribute.
+			</context>
+			<assertionDescription>
+				&quot;boolean(./self::saml:AuthorityBinding[@AuthorityKind='saml:AssertionIdReference'])=true() or boolean(./self::saml:AuthorityBinding[@AuthorityKind='saml:AssertionIDReference'])=true()&quot;
+			</assertionDescription>
+			<failureMessage>
+				The AuthorityKind attribute in saml:AuthorityBinding element
+				does NOT contain the value
+				&quot;saml:AssertionIdReference&quot; (i.e., it is NOT the case
+				that
+				&quot;./self::saml:AuthorityBinding[@AuthorityKind='saml:AssertionIdReference']&quot;).
+			</failureMessage>
+			<failureDetailDescription>
+				The saml:AuthorityBinding in question.
+			</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="SAML">R6607</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="" status="new"
+				testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="false" entryType="anySecureEnvelope"
+			id="BSP6997" type="notTestable">
+			<context>
+				For a message obtained by reversing the SOAP Messsage Security
+				of any secure message.
+			</context>
+			<assertionDescription>Not testable.</assertionDescription>
+			<failureMessage>Not testable.</failureMessage>
+			<failureDetailDescription />
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R5800</reference>
+				<reference profileID="BSP1">R5801</reference>
+				<reference profileID="BSP1">R5802</reference>
+				<reference profileID="BSP1">R5803</reference>
+				<reference profileID="BSP1">R5804</reference>
+				<reference profileID="BSP1">R5805</reference>
+				<reference profileID="BSP1">R5806</reference>
+				<reference profileID="BSP1">R5807</reference>
+				<reference profileID="BSP1">R5808</reference>
+				<reference profileID="BSP1">R5809</reference>
+				<reference profileID="BSP1">R5810</reference>
+				<reference profileID="BSP1">R5811</reference>
+				<reference profileID="BSP1">R5812</reference>
+				<reference profileID="BSP1">R5813</reference>
+				<reference profileID="BSP1">R5814</reference>
+			</referenceList>
+			<comments>
+				These restrictions are intended to clarify BP1.0 and BP1.1
+				statements that might be unclear when SOAP Message Security is
+				applied in compliance with the Basic Security Profile.
+			</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="false" entryType="anySecureEnvelope"
+			id="BSP6998" type="notTestable">
+			<context>
+				These assertions provide guidance for protecting attachements
+				when they are used with SOAP Messages.
+			</context>
+			<assertionDescription>Not testable.</assertionDescription>
+			<failureMessage>Not testable.</failureMessage>
+			<failureDetailDescription />
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R6001</reference>
+				<reference profileID="BSP1">R6002</reference>
+				<reference profileID="BSP1">R6003</reference>
+				<reference profileID="BSP1">R6100</reference>
+				<reference profileID="BSP1">R6101</reference>
+				<reference profileID="BSP1">R6103</reference>
+				<reference profileID="BSP1">R6104</reference>
+				<reference profileID="BSP1">R6106</reference>
+				<reference profileID="BSP1">R6107</reference>
+				<reference profileID="BSP1">R6108</reference>
+				<reference profileID="BSP1">R6109</reference>
+				<reference profileID="BSP1">R6200</reference>
+				<reference profileID="BSP1">R6201</reference>
+				<reference profileID="BSP1">R6202</reference>
+				<reference profileID="BSP1">R6203</reference>
+			</referenceList>
+			<comments />
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="false" entryType="anySecureEnvelope"
+			id="BSP6999" type="notTestable">
+			<context>Not testable.</context>
+			<assertionDescription>Not testable.</assertionDescription>
+			<failureMessage>Not testable.</failureMessage>
+			<failureDetailDescription>Not testable.</failureDetailDescription>
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">R2001</reference>
+				<reference profileID="BSP1">R2002</reference>
+				<reference profileID="BSP1">C2010</reference>
+				<reference profileID="BSP1">R3002</reference>
+				<reference profileID="BSP1">R3003</reference>
+				<reference profileID="BSP1">R3004</reference>
+				<reference profileID="BSP1">R3005</reference>
+				<reference profileID="BSP1">R3022</reference>
+				<reference profileID="BSP1">R3023</reference>
+				<reference profileID="BSP1">R3024</reference>
+				<reference profileID="BSP1">R3025</reference>
+				<reference profileID="BSP1">R3033</reference>
+				<reference profileID="BSP1">R3058</reference>
+				<reference profileID="BSP1">R3061</reference>
+				<reference profileID="BSP1">R3063</reference>
+				<reference profileID="BSP1">R3105</reference>
+				<reference profileID="BSP1">R3106</reference>
+				<reference profileID="BSP1">R3205</reference>
+				<reference profileID="BSP1">R3207</reference>
+				<reference profileID="BSP1">R3211</reference>
+				<reference profileID="BSP1">R3212</reference>
+				<reference profileID="BSP1">R3214</reference>
+				<reference profileID="BSP1">R3228</reference>
+				<reference profileID="BSP1">C4210</reference>
+				<reference profileID="BSP1">C4211</reference>
+				<reference profileID="BSP1">R4212</reference>
+				<reference profileID="BSP1">R4215</reference>
+				<reference profileID="BSP1">R5201</reference>
+				<reference profileID="BSP1">R5202</reference>
+				<reference profileID="BSP1">R5204</reference>
+				<reference profileID="BSP1">R5205</reference>
+				<reference profileID="BSP1">R5206</reference>
+				<reference profileID="BSP1">R5208</reference>
+				<reference profileID="BSP1">R5209</reference>
+				<reference profileID="BSP1">R5210</reference>
+				<reference profileID="BSP1">R5405</reference>
+				<reference profileID="BSP1">R5406</reference>
+				<reference profileID="BSP1">R5407</reference>
+				<reference profileID="BSP1">R5408</reference>
+				<reference profileID="BSP1">R5409</reference>
+				<reference profileID="BSP1">R5413</reference>
+				<reference profileID="BSP1">R5414</reference>
+				<reference profileID="BSP1">R5415</reference>
+				<reference profileID="BSP1">C5441</reference>
+				<reference profileID="BSP1">C5442</reference>
+				<reference profileID="BSP1">C5443</reference>
+				<reference profileID="BSP1">R5606</reference>
+				<reference profileID="BSP1">R5621</reference>
+				<reference profileID="BSP1">R5624</reference>
+				<reference profileID="BSP1">R5625</reference>
+				<reference profileID="BSP1">C5630</reference>
+				<reference profileID="BSP1">R5701</reference>
+				<reference profileID="BSP1">R5702</reference>
+				<reference profileID="BSP1">R5703</reference>
+				<reference profileID="BSP1">R5704</reference>
+				<reference profileID="SAML">R6302</reference>
+				<reference profileID="SAML">R6601</reference>
+				<reference profileID="SAML">R6603</reference>
+				<reference profileID="SAML">R6605</reference>
+				<reference profileID="SAML">R6606</reference>
+				<reference profileID="SAML">R6608</reference>
+				<reference profileID="SAML">R6609</reference>
+				<reference profileID="BSP1">R6902</reference>
+				<reference profileID="BSP1">R6903</reference>
+				<reference profileID="BSP1">R6904</reference>
+				<reference profileID="BSP1">R6905</reference>
+				<reference profileID="BSP1">E0009</reference>
+				<reference profileID="BSP1">E0010</reference>
+				<reference profileID="BSP1">E0011</reference>
+				<reference profileID="BSP1">E0012</reference>
+				<reference profileID="BSP1">E0013</reference>
+			</referenceList>
+			<comments>
+				All of these profile requirements are NOT testable. Some of
+				these test assertions represent capabilities which can not be
+				validated.
+			</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Ed Johns"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+		<testAssertion enabled="true" entryType="anySecureEnvelope" id="BSP0002"
+			type="informational">
+			<context>
+				For any secure envelope containing a wsse:SecurityTokenReference
+				element.
+			</context>
+			<assertionDescription>
+				For each token referenced by the wsse:SecurityTokenReference get
+				the referenced token and check if it is in the additional token
+				profile.
+			</assertionDescription>
+			<failureMessage />
+			<failureDetailDescription />
+			<additionalEntryTypeList>
+				<messageInput>none</messageInput>
+				<wsdlInput>none</wsdlInput>
+			</additionalEntryTypeList>
+			<prereqList />
+			<referenceList>
+				<reference profileID="BSP1">E0002</reference>
+			</referenceList>
+			<comments>Old id=&quot;BSP6600&quot;</comments>
+			<additionalInfo editorSignOff="" ownerSignOff="Shrikant Wagh"
+				status="new" testCasesCompleted="no" />
+		</testAssertion>
+	</artifact>
+	<!-- Although not required for the Basic Profile definition, the Profile   
+		Definition document may also contain a <link> element.  The 
+		purpose of this element is  to reference another Profile Definition 
+		document.
+		
+		<wsi-common:link namespace=http://www.ws-i.org/2002/10/test/profile/   location="http://www.ws-i.org/profiles/AnotherProfile.xml"/>
+	-->
+</profileAssertions>

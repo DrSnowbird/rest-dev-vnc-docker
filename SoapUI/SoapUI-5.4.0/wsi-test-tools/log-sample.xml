@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) 2007 by The Web Services-Interoperability Organization (WS-I) and 
+  Certain of its Members. All Rights Reserved.
+	
+  Notice
+  The material contained herein is not a license, either expressly or impliedly, to any 
+  intellectual property owned or controlled by any of the authors or developers of this 
+  material or WS-I. The material contained herein is provided on an "AS IS" basis and to 
+  the maximum extent permitted by applicable law, this material is provided AS IS AND WITH 
+  ALL FAULTS, and the authors and developers of this material and WS-I hereby disclaim all 
+  other warranties and conditions, either express, implied or statutory, including, but not 
+  limited to, any (if any) implied warranties, duties or conditions of  merchantability, 
+  of fitness for a particular purpose, of accuracy or completeness of responses, of results, 
+  of workmanlike effort, of lack of viruses, and of lack of negligence. ALSO, THERE IS NO 
+  WARRANTY OR CONDITION OF TITLE, QUIET ENJOYMENT, QUIET POSSESSION, CORRESPONDENCE TO 
+  DESCRIPTION OR NON-INFRINGEMENT WITH REGARD TO THIS MATERIAL.
+	
+  IN NO EVENT WILL ANY AUTHOR OR DEVELOPER OF THIS MATERIAL OR WS-I BE LIABLE TO ANY OTHER 
+  PARTY FOR THE COST OF PROCURING SUBSTITUTE GOODS OR SERVICES, LOST PROFITS, LOSS OF USE, 
+  LOSS OF DATA, OR ANY INCIDENTAL, CONSEQUENTIAL, DIRECT, INDIRECT, OR SPECIAL DAMAGES 
+  WHETHER UNDER CONTRACT, TORT, WARRANTY, OR OTHERWISE, ARISING IN ANY WAY OUT OF THIS OR 
+  ANY OTHER AGREEMENT RELATING TO THIS MATERIAL, WHETHER OR NOT SUCH PARTY HAD ADVANCE 
+  NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
+	
+	
+  WS-I License Information
+  Use of this WS-I Material is governed by the WS-I Test License and other licenses.  
+  Information on these licenses are contained in the README.txt and ReleaseNotes.txt files.  
+  By downloading this file, you agree to the terms of these licenses.
+
+	
+  How To Provide Feedback
+  The Web Services-Interoperability Organization (WS-I) would like to receive input, 
+  suggestions and other feedback ("Feedback") on this work from a wide variety of 
+  industry participants to improve its quality over time. 
+	
+  By sending email, or otherwise communicating with WS-I, you (on behalf of yourself if 
+  you are an individual, and your company if you are providing Feedback on behalf of the 
+  company) will be deemed to have granted to WS-I, the members of WS-I, and other parties 
+  that have access to your Feedback, a non-exclusive, non-transferable, worldwide, perpetual, 
+  irrevocable, royalty-free license to use, disclose, copy, license, modify, sublicense or 
+  otherwise distribute and exploit in any manner whatsoever the Feedback you provide regarding 
+  the work. You acknowledge that you have no expectation of confidentiality with respect to 
+  any Feedback you provide. You represent and warrant that you have rights to provide this 
+  Feedback, and if you are providing Feedback on behalf of a company, you represent and warrant 
+  that you have the rights to provide Feedback on behalf of your company. You also acknowledge 
+  that WS-I is not required to review, discuss, use, consider or in any way incorporate your 
+  Feedback into future versions of its work. If WS-I does incorporate some or all of your 
+  Feedback in a future version of the work, it may, but is not obligated to include your name 
+  (or, if you are identified as acting on behalf of your company, the name of your company) on 
+  a list of contributors to the work. If the foregoing is not acceptable to you and any company 
+  on whose behalf you are acting, please do not provide any Feedback.
+	
+  WS-I members should direct feedback on this document to wsi_testing@lists.ws-i.org;
+  non-members should direct feedback to wsi-tools@ws-i.org. 
+-->
+<?xml-stylesheet type="text/xsl" href="xsl/log.xsl"?>
+<wsi-log:log timestamp="2004-04-05T13:44:31-07:00" xmlns:wsi-log="http://www.ws-i.org/testing/2003/03/log/" xmlns:wsi-monConfig="http://www.ws-i.org/testing/2003/03/monitorConfig/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<wsi-log:monitor releaseDate="2004-03-08" version="1.1.0.13">
+		<wsi-log:implementer location="http://www.ws-i.org/implementation.aspx" name="Web Services Interoperability Organization"/>
+		<wsi-log:environment>
+			<wsi-log:runtime name=".NET" version="1.1.4322.573"/>
+			<wsi-log:operatingSystem name="Win32NT" version="5.1.2600.0"/>
+			<wsi-log:xmlParser name=".NET" version="1.1.4322.573"/>
+		</wsi-log:environment>
+		<wsi-monConfig:configuration>
+			<wsi-monConfig:comment>
+				This is a general config comment.
+			</wsi-monConfig:comment>
+			<wsi-monConfig:logFile location="traceLog.xml" replace="true"/>
+			<wsi-monConfig:logDuration>
+				3600
+			</wsi-monConfig:logDuration>
+			<wsi-monConfig:cleanupTimeoutSeconds>
+				3
+			</wsi-monConfig:cleanupTimeoutSeconds>
+			<wsi-monConfig:manInTheMiddle>
+				<wsi-monConfig:redirect>
+					<wsi-monConfig:comment>
+						This redirects to local machine
+					</wsi-monConfig:comment>
+					<wsi-monConfig:listenPort>
+						9090
+					</wsi-monConfig:listenPort>
+					<wsi-monConfig:schemeAndHostPort>
+						localhost:80
+					</wsi-monConfig:schemeAndHostPort>
+					<wsi-monConfig:maxConnections>
+						1000
+					</wsi-monConfig:maxConnections>
+					<wsi-monConfig:readTimeoutSeconds>
+						360
+					</wsi-monConfig:readTimeoutSeconds>
+				</wsi-monConfig:redirect>
+			</wsi-monConfig:manInTheMiddle>
+		</wsi-monConfig:configuration>
+	</wsi-log:monitor>
+	<wsi-log:messageEntry ID="1" conversationID="1" timestamp="2004-04-05T13:45:02.7376725-07:00" type="request" xsi:type="wsi-log:httpMessageEntry">
+		<wsi-log:messageContent>&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:wsa=&quot;http://schemas.xmlsoap.org/ws/2004/03/addressing&quot; xmlns:wsse=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd&quot; xmlns:wsu=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+	&lt;soap:Header&gt;
+		&lt;wsa:Action wsu:Id=&quot;Id-430f3375-9e40-4261-b238-7f6f3598c249&quot;&gt;
+			http://stockservice.contoso.com/wse/samples/2003/06/StockQuoteRequest
+		&lt;/wsa:Action&gt;
+		&lt;wsa:MessageID wsu:Id=&quot;Id-8c849dec-a971-4e1c-93ad-49f2abc9fba2&quot;&gt;
+			uuid:c93a1ce6-7883-497b-a2c9-1639d0eeca7f
+		&lt;/wsa:MessageID&gt;
+		&lt;wsa:ReplyTo wsu:Id=&quot;Id-5b4e2e0b-0c5e-4fa0-95e5-c3e9d6d6d209&quot;&gt;
+			&lt;wsa:Address&gt;
+				http://schemas.xmlsoap.org/ws/2004/03/addressing/role/anonymous
+			&lt;/wsa:Address&gt;
+		&lt;/wsa:ReplyTo&gt;
+		&lt;wsa:To wsu:Id=&quot;Id-518e7931-9097-4f0d-85fa-e36690282f22&quot;&gt;
+			http://localhost/UsernameSignCodeService/UsernameSigningService.asmx
+		&lt;/wsa:To&gt;
+		&lt;wsse:Security soap:mustUnderstand=&quot;1&quot;&gt;
+			&lt;wsu:Timestamp wsu:Id=&quot;Timestamp-2c2073e1-9c21-48b0-b50f-32c810aac4bf&quot;&gt;
+				&lt;wsu:Created&gt;
+					2004-07-15T17:18:54Z
+				&lt;/wsu:Created&gt;
+				&lt;wsu:Expires&gt;
+					2004-07-15T17:19:54Z
+				&lt;/wsu:Expires&gt;
+			&lt;/wsu:Timestamp&gt;
+			&lt;xenc:EncryptedKey xmlns:xenc=&quot;http://www.w3.org/2001/04/xmlenc#&quot;&gt;
+				&lt;xenc:EncryptionMethod Algorithm=&quot;http://www.w3.org/2001/04/xmlenc#rsa-1_5&quot;/&gt;
+				&lt;KeyInfo xmlns=&quot;http://www.w3.org/2000/09/xmldsig#&quot;&gt;
+					&lt;wsse:SecurityTokenReference&gt;
+						&lt;wsse:KeyIdentifier EncodingType=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary&quot; ValueType=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509SubjectKeyIdentifier&quot;&gt;
+							bBwPfItvKp3b6TNDq+14qs58VJQ=
+						&lt;/wsse:KeyIdentifier&gt;
+					&lt;/wsse:SecurityTokenReference&gt;
+				&lt;/KeyInfo&gt;
+				&lt;xenc:CipherData&gt;
+					&lt;xenc:CipherValue&gt;
+						U5EV6iNWO6mOZVskUKodtE9dfeZwqrlzG3x316CUpl/LWFUtoWah53RTNvxiuFTSlNzTgawiMkX2S0mT7P4HjCCi1SRUu3BCRlWj7XqsLn5mDnVYyXfBB/PLtiSd/vSUWqjjfMoViq8h8+JI46Aqi2+BwOsjb+jyIPoRLUscu8M=
+					&lt;/xenc:CipherValue&gt;
+				&lt;/xenc:CipherData&gt;
+				&lt;xenc:ReferenceList&gt;
+					&lt;xenc:DataReference URI=&quot;#EncryptedContent-ec35a965-858f-4525-98d7-60345212bb5d&quot;/&gt;
+				&lt;/xenc:ReferenceList&gt;
+			&lt;/xenc:EncryptedKey&gt;
+			&lt;wsse:UsernameToken wsu:Id=&quot;SecurityToken-ff3218c3-29f3-45c4-a2a8-773ee7a0b95b&quot; xmlns:wsu=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd&quot;&gt;
+				&lt;xenc:EncryptedData Id=&quot;EncryptedContent-ec35a965-858f-4525-98d7-60345212bb5d&quot; Type=&quot;http://www.w3.org/2001/04/xmlenc#Content&quot; xmlns:xenc=&quot;http://www.w3.org/2001/04/xmlenc#&quot;&gt;
+					&lt;xenc:EncryptionMethod Algorithm=&quot;http://www.w3.org/2001/04/xmlenc#aes128-cbc&quot;/&gt;
+					&lt;xenc:CipherData&gt;
+						&lt;xenc:CipherValue&gt;
+							FTFKdrU2Lp1yRIGboT3Fb8j739F2EUaPujVZLGWJwcDSKHX24zRUja+u0zK7yXBTyBO+kMXG0OxjuM/5R0VmILhyVmTVgc/NIsPe4txDxhZ0xiRhekBsQwyHKgwhVBHDHP4o96hGeoRitrcgaA9dPLXmuo/KbMjhyTsBJD/M+WK1IuAv5LRZUZE72VYPzOEZyEjBn9KNe+dWmEoEXrtyX0xOJSC0gZdyZaotVby4U/6l4Ri8dfzyKfS+KAp0dLBaaTF+3hyCWgMxqiLpatIdwHaYP+iwm/LeLkgHljo+QdQY4Y6cCf4QlYOFdHu7XibuEh6+9b9wbBpcJUdvl5wa81xUEIhvkhqf9aMHwg118VMy9Q0WVTLdelYJ2srRq+RZWs3M5nx9uRIJPJHAJ/+V5cbSSGQwHAFyOIMDGwQ8bkCIKjK9n+vSa7+SYYQ7sIaFy7u7gLijbRnMmYBHY0P/MPb6Hp4X64z1hgHIN93MvEHeQQjvW60+m9Z9zctQZz4TOx0ICAHld0Y/2fxw5RIH8iv8MHQkNFn0V5te1BmEYT3/pVF3ruWqXLhZef3pjmZuFA9fIMUtEAVts5v+4OhPIQ==
+						&lt;/xenc:CipherValue&gt;
+					&lt;/xenc:CipherData&gt;
+				&lt;/xenc:EncryptedData&gt;
+			&lt;/wsse:UsernameToken&gt;
+			&lt;Signature xmlns=&quot;http://www.w3.org/2000/09/xmldsig#&quot;&gt;
+				&lt;SignedInfo&gt;
+					&lt;CanonicalizationMethod Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;
+					&lt;SignatureMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#hmac-sha1&quot;/&gt;
+					&lt;Reference URI=&quot;#Id-430f3375-9e40-4261-b238-7f6f3598c249&quot;&gt;
+						&lt;Transforms&gt;
+							&lt;Transform Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;
+						&lt;/Transforms&gt;
+						&lt;DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;
+						&lt;DigestValue&gt;
+							Rb3sSO9B4VKkfAeA2dL+1SNVuBI=
+						&lt;/DigestValue&gt;
+					&lt;/Reference&gt;
+					&lt;Reference URI=&quot;#Id-8c849dec-a971-4e1c-93ad-49f2abc9fba2&quot;&gt;
+						&lt;Transforms&gt;
+							&lt;Transform Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;
+						&lt;/Transforms&gt;
+						&lt;DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;
+						&lt;DigestValue&gt;
+							TtC/ea6TO8hKJms3RC9xVaQaOJA=
+						&lt;/DigestValue&gt;
+					&lt;/Reference&gt;
+					&lt;Reference URI=&quot;#Id-5b4e2e0b-0c5e-4fa0-95e5-c3e9d6d6d209&quot;&gt;
+						&lt;Transforms&gt;
+							&lt;Transform Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;
+						&lt;/Transforms&gt;
+						&lt;DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;
+						&lt;DigestValue&gt;
+							yqOmiFkqPGYXladNUkPUIVGjHgY=
+						&lt;/DigestValue&gt;
+					&lt;/Reference&gt;
+					&lt;Reference URI=&quot;#Id-518e7931-9097-4f0d-85fa-e36690282f22&quot;&gt;
+						&lt;Transforms&gt;
+							&lt;Transform Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;
+						&lt;/Transforms&gt;
+						&lt;DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;
+						&lt;DigestValue&gt;
+							C9xdjxRtToI3kCmSQuqA/9JmOZU=
+						&lt;/DigestValue&gt;
+					&lt;/Reference&gt;
+					&lt;Reference URI=&quot;#Timestamp-2c2073e1-9c21-48b0-b50f-32c810aac4bf&quot;&gt;
+						&lt;Transforms&gt;
+							&lt;Transform Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;
+						&lt;/Transforms&gt;
+						&lt;DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;
+						&lt;DigestValue&gt;
+							PsxB0a2Sj7enhh1qDnQMkPVHSUU=
+						&lt;/DigestValue&gt;
+					&lt;/Reference&gt;
+					&lt;Reference URI=&quot;#Id-2a33af0b-9e6e-4d4f-914c-7d668aa17afd&quot;&gt;
+						&lt;Transforms&gt;
+							&lt;Transform Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;
+						&lt;/Transforms&gt;
+						&lt;DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;
+						&lt;DigestValue&gt;
+							dPv2m3BeETlHYgw4qWJX+pgylgY=
+						&lt;/DigestValue&gt;
+					&lt;/Reference&gt;
+				&lt;/SignedInfo&gt;
+				&lt;SignatureValue&gt;
+					K1sxQmX8WpUkKDiLWlNjdfHUwtk=
+				&lt;/SignatureValue&gt;
+				&lt;KeyInfo&gt;
+					&lt;wsse:SecurityTokenReference&gt;
+						&lt;wsse:Reference URI=&quot;#SecurityToken-ff3218c3-29f3-45c4-a2a8-773ee7a0b95b&quot; ValueType=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#UsernameToken&quot;/&gt;
+					&lt;/wsse:SecurityTokenReference&gt;
+				&lt;/KeyInfo&gt;
+			&lt;/Signature&gt;
+		&lt;/wsse:Security&gt;
+	&lt;/soap:Header&gt;
+	&lt;soap:Body wsu:Id=&quot;Id-2a33af0b-9e6e-4d4f-914c-7d668aa17afd&quot;&gt;
+		&lt;StockQuoteRequest xmlns=&quot;http://stockservice.contoso.com/wse/samples/2003/06&quot;&gt;
+			&lt;symbols&gt;
+				&lt;Symbol&gt;
+					FABRIKAM
+				&lt;/Symbol&gt;
+				&lt;Symbol&gt;
+					CONTOSO
+				&lt;/Symbol&gt;
+			&lt;/symbols&gt;
+		&lt;/StockQuoteRequest&gt;
+	&lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</wsi-log:messageContent><wsi-log:senderHostAndPort>
+			127.0.0.1:2293
+		</wsi-log:senderHostAndPort>
+		<wsi-log:receiverHostAndPort>
+			localhost:80
+		</wsi-log:receiverHostAndPort>
+		<wsi-log:httpHeaders>
+			POST /UsernameSignCodeService/UsernameSigningService.asmx HTTP/1.1User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; MS Web Services Client Protocol 1.1.4322.573)Content-Type: text/xml; charset=utf-8SOAPAction: &quot;http://stockservice.contoso.com/wse/samples/2003/06/StockQuoteRequest&quot;Content-Length: 5789Expect: 100-continueConnection: Keep-AliveHost: localhost:8080
+		</wsi-log:httpHeaders>
+	</wsi-log:messageEntry>
+</wsi-log:log>

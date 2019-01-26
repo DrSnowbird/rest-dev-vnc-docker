@@ -1,14 +1,47 @@
-# NOT READY YET!!!!!!!!!!!!
 
-# Restful API Development with common tools needed in VNC/noVNC-based Docker
-* Java 8 (1.8.0_201) JDK + Maven 3.6 + Python 3.5 + PIP3 18.1 + npm 6.4.1 + node v10.15.0 + Gradle 5.1 + noVNC/VNC (as Cluster Container Desktop)
-[![](https://images.microbadger.com/badges/image/openkbs/api-dev-vnc-docker.svg)](https://microbadger.com/images/openkbs/api-dev-vnc-docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/api-dev-vnc-docker.svg)](https://microbadger.com/images/openkbs/api-dev-vnc-docker "Get your own version badge on microbadger.com")
+# SOAP / REST API Development with common tools within VNC/noVNC-based Docker
+* SOAP-UI + Swagger-Editor + Atom + Eclipse Photon + Java 8 + Maven 3 + Python 3 + npm 6+ node 10 + Gradle 5 + noVNC/VNC (as Cluster Container Desktop)
+[![](https://images.microbadger.com/badges/image/openkbs/rest-dev-vnc-docker.svg)](https://microbadger.com/images/openkbs/rest-dev-vnc-docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/rest-dev-vnc-docker.svg)](https://microbadger.com/images/openkbs/rest-dev-vnc-docker "Get your own version badge on microbadger.com")
 
 # License Agreement
 By using this image, you agree the [Oracle Java JDK License](http://www.oracle.com/technetwork/java/javase/terms/license/index.html).
 This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). You must accept the [Oracle Binary Code License Agreement for Java SE](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) to use this image.
 
-# Components
+# Concept - Dev Environment everywhere using VNC/noVNC Docker
+The idea is to use Docker with VNC/noVNC to aggregate all the needed and related Developments tools/IDEs within a single Docker as an agile way to stand up specific collections of tools quick within a Container quick computing needs, e.g.,
+* REST Development (this GIT) to cover end-to-end needs from JSON/XML, REST connection, Swagger, Mongodb, Test, etc.
+* NLP/Semantic Development (coming soon)
+* ... and more per your imaginations or needs in your business application domains, e.g, bio-science, etc.
+
+**The use-cases of this kind of VNC/noVNC docker container is just limited by your imaginations and your device or networking limitations - accessbile from Your smartphones, tablets, SurfacePro, Amazon Fire tablet, Chrome PC, Desktop, etc. (Hmmm! in theory, you can even use your Apple iWatch to use KNIME, Eclipse Photon, IntelliJ, etc. -- literally, any device can run HTML-5 Web Browsers!**
+# REST Tools / Components
+The followings are available now for REST Development:
+```
+./components
+├── app-postman.sh
+├── ide-atom.sh
+├── ide-eclipse.sh (if need to run again)
+├── json-editor.sh
+├── mongodb-compass-gui.sh
+├── nosql-mongodb-Ubuntu-16.sh
+├── soap-ui.sh
+├── swagger-editor.sh
+├── sample-rest-api.sh  (optional)
+└── swagger-rest-api.sh  (optional)
+
+```
+If needed again, you just run each needed component setup script, e.g.,
+```
+~/components/app-postman.sh
+~/ide-atom.sh
+~/mongodb-compass-gui.sh
+~/nosql-mongodb-Ubuntu-16.sh
+~/sample-rest-api.sh
+~/swagger-rest-api.sh
+```
+
+# Core Components
+* Eclipse Photon IDE
 * VNC/noVNC for both browswer-based VNC and VNC-client to connect to use Desktop GUI from Docker container.
 * java version "1.8.0_201"
   Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
@@ -23,10 +56,11 @@ This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase
 # Note:
 This project mainly adopt the [ConSol docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) implementation.
 
-# Run - Demo
+# Run
 ```bash
 ./run.sh
 ```
+
 ## Connect to VNC Viewer/Client or noVNC (Browser-based VNC)
 * connect via VNC viewer localhost:5901, default password: vncpassword
 * connect via noVNC HTML5 full client: http://localhost:6901/vnc.html, default password: vncpassword
@@ -40,6 +74,7 @@ e.g.
 => Openshift Container Platform: http://<route-from-openshift>/vnc.html
 => similarly for Kubernetes Container Platform: (similar to the Openshift above!)
 ```
+
 # Run - Override VNC environment variables 
 The following VNC environment variables can be overwritten at the docker run phase to customize your desktop environment inside the container. You can change those variables using configurations CLI or Web-GUI with OpenShift, Kubernetes, DC/OS, etc.
 ```
@@ -50,6 +85,13 @@ VNC_RESOLUTION, default: 1920x1080 , e.g., change to 1280x1024
 VNC_PW, default: vncpassword , e.g., change to MySpecial!(Password%)
     -e VNC_PW=MySpecial!(Password%)
 ```
+
+# Use Cases - Virtual/Physical Class setup
+## One-Container-for-Each-Student:
+* For standalone container, you just need to spin up, say, 18 containers, one for each student VNC/noVNC, each with different host ports, 6901, 6902, .., 6918 for noNVC ports.
+* For using OpenShift to create, you can just spin 18 containers and create "route" for each instances, then give each student different each route (hostname generated by OpenShift).
+## One-Container-for-ALL-students to see what you do:
+* Just give your container IP/Hostname/Route (from OpenShift) to all your students to login, then they will all see what you do identically. Or, your students can even take over your mouse to show you what you did wrong for your codes, equations or graphs.
 
 # Screen (Desktop) Resolution
 Two ways to change Screen resolutions.
@@ -68,7 +110,7 @@ Set up, say, VNC_RESOLUTION with value 1920x1280
 # Base the image to build add-on components
 
 ```Dockerfile
-FROM openkbs/api-dev-vnc-docker
+FROM openkbs/rest-dev-vnc-docker
 ```
 
 # Run the image
@@ -78,27 +120,27 @@ Then, you're ready to run:
 
 ```bash
 mkdir ./data
-docker run -d --name my-api-dev-vnc-docker -v $PWD/data:/data -i -t openkbs/api-dev-vnc-docker
+docker run -d --name my-rest-dev-vnc-docker -v $PWD/data:/data -i -t openkbs/rest-dev-vnc-docker
 ```
 
 # Build and Run your own image
-Say, you will build the image "my/api-dev-vnc-docker".
+Say, you will build the image "my/rest-dev-vnc-docker".
 
 ```bash
-docker build -t my/api-dev-vnc-docker .
+docker build -t my/rest-dev-vnc-docker .
 ```
 
-To run your own image, say, with some-api-dev-vnc-docker:
+To run your own image, say, with some-rest-dev-vnc-docker:
 
 ```bash
 mkdir ./data
-docker run -d --name some-api-dev-vnc-docker -v $PWD/data:/data -i -t my/jdk-mvn-py3
+docker run -d --name some-rest-dev-vnc-docker -v $PWD/data:/data -i -t my/jdk-mvn-py3
 ```
 
 ## Shell into the Docker instance
 
 ```bash
-docker exec -it some-api-dev-vnc-docker /bin/bash
+docker exec -it some-rest-dev-vnc-docker /bin/bash
 ```
 
 ## Run Python code
@@ -106,13 +148,13 @@ docker exec -it some-api-dev-vnc-docker /bin/bash
 To run Python code
 
 ```bash
-docker run -it --rm openkbs/api-dev-vnc-docker python3 -c 'print("Hello World")'
+docker run -it --rm openkbs/rest-dev-vnc-docker python3 -c 'print("Hello World")'
 ```
 
 or,
 
 ```bash
-docker run -i --rm openkbs/api-dev-vnc-docker python3 < myPyScript.py
+docker run -i --rm openkbs/rest-dev-vnc-docker python3 < myPyScript.py
 ```
 
 or,
@@ -120,13 +162,13 @@ or,
 ```bash
 mkdir ./data
 echo "print('Hello World')" > ./data/myPyScript.py
-docker run -it --rm --name some-api-dev-vnc-docker -v "$PWD"/data:/data openkbs/api-dev-vnc-docker python3 myPyScript.py
+docker run -it --rm --name some-rest-dev-vnc-docker -v "$PWD"/data:/data openkbs/rest-dev-vnc-docker python3 myPyScript.py
 ```
 
 or,
 
 ```bash
-alias dpy3='docker run --rm openkbs/api-dev-vnc-docker python3'
+alias dpy3='docker run --rm openkbs/rest-dev-vnc-docker python3'
 dpy3 -c 'print("Hello World")'
 ```
 
@@ -146,8 +188,8 @@ public class HelloWorld {
 }
 EOF
 cat ./data/HelloWorld.java
-alias djavac='docker run -it --rm --name some-api-dev-vnc-docker -v '$PWD'/data:/data openkbs/api-dev-vnc-docker javac'
-alias djava='docker run -it --rm --name some-api-dev-vnc-docker -v '$PWD'/data:/data openkbs/api-dev-vnc-docker java'
+alias djavac='docker run -it --rm --name some-rest-dev-vnc-docker -v '$PWD'/data:/data openkbs/rest-dev-vnc-docker javac'
+alias djava='docker run -it --rm --name some-rest-dev-vnc-docker -v '$PWD'/data:/data openkbs/rest-dev-vnc-docker java'
 
 djavac HelloWorld.java
 djava HelloWorld
@@ -166,7 +208,6 @@ However, for larger complex projects, you might want to consider to use Docker-b
 * [Running GUI apps in Docker containers using VNC](http://blog.fx.lv/2017/08/running-gui-apps-in-docker-containers-using-vnc/)
 * [Docker-headless-VNC-Container](https://github.com/DrSnowbird/docker-headless-vnc-container)
 
-# See Also - Docker-based IDE
 # See also similar docker-based IDE
 * [openkbs/docker-atom-editor](https://hub.docker.com/r/openkbs/docker-atom-editor/)
 * [openkbs/eclipse-oxygen-docker](https://hub.docker.com/r/openkbs/eclipse-oxygen-docker/)
