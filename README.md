@@ -13,7 +13,7 @@ The idea is to use Docker with VNC/noVNC to aggregate all the needed and related
 * NLP/Semantic Development (coming soon)
 * ... and more per your imaginations or needs in your business application domains, e.g, bio-science, etc.
 
-**The use-cases of this kind of VNC/noVNC docker container is just limited by your imaginations and your device or networking limitations - accessbile from Your smartphones, tablets, SurfacePro, Amazon Fire tablet, Chrome PC, Desktop, etc. (Hmmm! in theory, you can even use your Apple iWatch to use KNIME, Eclipse Photon, IntelliJ, etc. -- literally, any device can run HTML-5 Web Browsers!**
+**The use-cases of this kind of VNC/noVNC docker container is just limited by your imaginations and your device or networking limitations. Virtually it's accessbile ubiquitously from Your smartphones, tablets, SurfacePro, Amazon Fire tablet, Chrome PC, Desktop, etc. (Hmmm! in theory, you can even use your Apple iWatch to use KNIME, Eclipse Photon, IntelliJ, etc. -- any device can run HTML-5 Web Browsers!**
 # REST Tools / Components
 The followings are available now for REST Development:
 ```
@@ -33,15 +33,15 @@ The followings are available now for REST Development:
 If needed again, you just run each needed component setup script, e.g.,
 ```
 ~/components/app-postman.sh
-~/ide-atom.sh
-~/mongodb-compass-gui.sh
-~/nosql-mongodb-Ubuntu-16.sh
-~/sample-rest-api.sh
-~/swagger-rest-api.sh
+~/componetns/ide-atom.sh
+~/componetns/json-editor.sh
+~/componetns/mongodb-compass-gui.sh
+~/componetns/nosql-mongodb-Ubuntu-16.sh
+~/componetns/swagger-editor.sh
 ```
 
 # Core Components
-* Eclipse Photon IDE
+* Atom (default) / Eclipse Photon IDE (installable with script, ~/components/ide-eclipse.sh)
 * VNC/noVNC for both browswer-based VNC and VNC-client to connect to use Desktop GUI from Docker container.
 * java version "1.8.0_201"
   Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
@@ -292,4 +292,5 @@ VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
 
 ```
+
 

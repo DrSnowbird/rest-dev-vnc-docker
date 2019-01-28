@@ -3,21 +3,17 @@
 #### Swagger-based REST API Editor ####
 INSTALL_DIR=${HOME}/tools
 PRODUCT_VERSION=
-PRODUCT_HOME=${INSTALL_DIR}/swagger-editor
+PRODUCT_HOME=${INSTALL_DIR}/swagger-ui
 PRODUCT_EXE=
 PRODUCT_TAR_URL=https://github.com/DrSnowbird/json-editor/archive/master.zip
 
-WORKSPACE=${HOME}/Projects/swagger-editor
+WORKSPACE=${HOME}/Projects/swagger-ui
 
 if [ "$1" = "install" ] || [ ! -d ${PRODUCT_HOME} ] ; then
     if [ ! -s $HOME/$(basename $0).installed ]; then
         mkdir -p ${INSTALL_DIR}; cd ${INSTALL_DIR}
-        #wget -c https://github.com/swagger-api/swagger-editor/archive/master.zip
-        #unzip master.zip; mv ${PRODUCT_HOME}-master ${PRODUCT_HOME}
-        git clone https://github.com/swagger-api/swagger-editor.git
+        git clone https://github.com/swagger-api/swagger-ui.git
         cd ${PRODUCT_HOME}
-        npm install --save-dev eslint eslint-plugin-node
-        sudo install -g node-sass
         npm install
     else
         echo "... Installed before already! ..."
@@ -28,9 +24,9 @@ fi
 mkdir -p ${WORKSPACE}
 cd ${PRODUCT_HOME}
 
-nohup npm start 2>&1 > $HOME/logs/$(basename $0).log &
+nohup npm run dev 2>&1 > $HOME/logs/$(basename $0).log &
 
-echo "Swagger Editor: http://localhost:3001/"
+echo "Swagger UI: http://localhost:3200/"
 echo
 echo ">>> ---------------------------------------------------------------------------------------"
 echo ">>> If you need standalone/individual docker stack for swagger,"
