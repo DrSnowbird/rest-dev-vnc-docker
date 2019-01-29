@@ -9,6 +9,7 @@ printenv
 /bin/bash -c "${HOME}/components/json-editor.sh"
 /bin/bash -c "${HOME}/components/soap-ui.sh"
 #/bin/bash -c "${HOME}/components/swagger-editor.sh"
+#/bin/bash -c "${HOME}/components/swagger-ui.sh"
 /bin/bash -c "${HOME}/components/mongodb-compass-gui.sh"
 
 #/bin/bash -c "${HOME}/components/ide-eclipse.sh"

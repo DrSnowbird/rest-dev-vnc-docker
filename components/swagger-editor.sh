@@ -31,6 +31,8 @@ cd ${PRODUCT_HOME}
 nohup npm start 2>&1 > $HOME/logs/$(basename $0).log &
 
 echo "Swagger Editor: http://localhost:3001/"
+chromium http://localhost:3001/
+
 echo
 echo ">>> ---------------------------------------------------------------------------------------"
 echo ">>> If you need standalone/individual docker stack for swagger,"

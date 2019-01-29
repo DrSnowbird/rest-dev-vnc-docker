@@ -26,6 +26,7 @@ RUN cd components ; ./json-editor.sh install
 RUN cd components ; ./mongodb-compass-gui.sh install
 RUN cd components ; ./nosql-mongodb-Ubuntu-16.sh install
 RUN cd components ; ./swagger-editor.sh install
+# RUN cd components ; ./swagger-ui.sh install
 
 ## Correct the problem VNC/noVNC chown ownship of /usr/share with 4011 and now back to root
 

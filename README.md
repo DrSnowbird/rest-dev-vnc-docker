@@ -13,31 +13,27 @@ The idea is to use Docker with VNC/noVNC to aggregate all the needed and related
 * NLP/Semantic Development (coming soon)
 * ... and more per your imaginations or needs in your business application domains, e.g, bio-science, etc.
 
-**The use-cases of this kind of VNC/noVNC docker container is just limited by your imaginations and your device or networking limitations. Virtually it's accessbile ubiquitously from Your smartphones, tablets, SurfacePro, Amazon Fire tablet, Chrome PC, Desktop, etc. (Hmmm! in theory, you can even use your Apple iWatch to use KNIME, Eclipse Photon, IntelliJ, etc. -- any device can run HTML-5 Web Browsers!**
+**The use-cases of this kind of VNC/noVNC docker container is just limited by your imaginations and your device or networking limitations. Virtually it's accessbile ubiquitously from Your smartphones, tablets, SurfacePro, Amazon Fire tablet, Chrome PC, Desktop, etc. (Hmmm! in theory, you can even use your Apple iWatch to use KNIME, Eclipse Photon, IntelliJ, etc. with any device can run HTML-5 Web Browsers!**
 # REST Tools / Components
 The followings are available now for REST Development:
 ```
 ./components
 ├── app-postman.sh
 ├── ide-atom.sh
-├── ide-eclipse.sh (if need to run again)
+├── ide-eclipse.sh
 ├── json-editor.sh
 ├── mongodb-compass-gui.sh
 ├── nosql-mongodb-Ubuntu-16.sh
+├── sample-rest-api.sh (optional)
 ├── soap-ui.sh
 ├── swagger-editor.sh
-├── sample-rest-api.sh  (optional)
-└── swagger-rest-api.sh  (optional)
+├── swagger-rest-api.sh (optional)
+└── swagger-ui.sh (optional)
 
 ```
 If needed again, you just run each needed component setup script, e.g.,
 ```
-~/components/app-postman.sh
-~/componetns/ide-atom.sh
-~/componetns/json-editor.sh
-~/componetns/mongodb-compass-gui.sh
-~/componetns/nosql-mongodb-Ubuntu-16.sh
-~/componetns/swagger-editor.sh
+~/componetns/swagger-ui.sh
 ```
 
 # Core Components

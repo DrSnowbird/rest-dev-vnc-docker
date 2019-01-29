@@ -14,6 +14,7 @@ if [ "$1" = "install" ] || [ ! -d ${PRODUCT_HOME} ] ; then
         mkdir -p ${INSTALL_DIR}; cd ${INSTALL_DIR}
         git clone https://github.com/swagger-api/swagger-ui.git
         cd ${PRODUCT_HOME}
+        sudo npm install node-sass -g
         npm install
     else
         echo "... Installed before already! ..."
@@ -27,6 +28,9 @@ cd ${PRODUCT_HOME}
 nohup npm run dev 2>&1 > $HOME/logs/$(basename $0).log &
 
 echo "Swagger UI: http://localhost:3200/"
+
+chromium http://localhost:3200/
+
 echo
 echo ">>> ---------------------------------------------------------------------------------------"
 echo ">>> If you need standalone/individual docker stack for swagger,"
