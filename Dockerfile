@@ -18,7 +18,7 @@ USER ${USER}
 WORKDIR ${HOME}
 
 COPY components ${HOME}/components
-RUN sudo chown -R ${USER}:${USER} ${HOME}/components && chmod +x ${HOME}/components/*.sh 
+RUN sudo chown -R ${USER}:${USER} ${HOME}/components && chmod 0755 ${HOME}/components/*.sh 
 RUN cd components ; ./app-postman.sh install
 RUN cd components ; ./ide-atom.sh install
 RUN cd components ; ./soap-ui.sh install

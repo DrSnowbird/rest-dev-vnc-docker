@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 printenv
 
 /bin/bash -c "${HOME}/components/app-postman.sh"
