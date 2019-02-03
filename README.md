@@ -11,11 +11,12 @@ This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase
 The idea is to use Docker with VNC/noVNC to aggregate all the needed and related Developments tools/IDEs within a single Docker as an agile way to stand up specific collections of tools quick within a Container quick computing needs, e.g.,
 * REST Development (this GIT) to cover end-to-end needs from JSON/XML, REST connection, Swagger, Mongodb, Test, etc.
 * NLP/Semantic Development (coming soon)
-* ... and more per your imaginations or needs in your business application domains, e.g, bio-science, etc.
+* ... and more per your imaginations or needs in your business application domains, e.g, bio-science, finance, IoT, etc.
 
-**The use-cases of this kind of VNC/noVNC docker container is just limited by your imaginations and your device or networking limitations. Virtually it's accessbile ubiquitously from Your smartphones, tablets, SurfacePro, Amazon Fire tablet, Chrome PC, Desktop, etc. (Hmmm! in theory, you can even use your Apple iWatch to use KNIME, Eclipse Photon, IntelliJ, etc. with any device can run HTML-5 Web Browsers!**
+**The use-cases of this kind of VNC/noVNC docker container is just limited by your imaginations and your device or networking limitations. Virtually it's accessbile ubiquitously from Your favorite smartphones, tablets, e.g., iPad, SurfacePro, Amazon Fire tablet, Chrome PC, Desktop PC, etc. (Hmmm! in theory, if you can read tiny screens, you can even use your Apple iWatch to use KNIME, Eclipse Photon, IntelliJ, etc. as long as it can display HTML-5 Web Browsers!**
+
 # REST Tools / Components
-The followings are available now for REST Development:
+The followings are available now for REST Development and more will be added either as default or optional under the "**./components**" directory:
 ```
 ./components
 ├── app-postman.sh
@@ -52,10 +53,45 @@ If needed again, you just run each needed component setup script, e.g.,
 # Note:
 This project mainly adopt the [ConSol docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) implementation.
 
-# Run
-```bash
+# Run (recommended for easy-start)
+It's highly recommended to change tvnc password to prevent others usign the default password to get into your container, modify the file "**./docker.env**" as below and save the filw before you hit, "./run.sh":
+```
+(./docker.env) file:
+
+#### ---- VNC Password ----
+VNC_PW=MySuperStrongPassword
+```
+* Once the above build is done, you can run IntelliJ now using the command below.
+```
 ./run.sh
 ```
+The run.sh command will auto-generate the docker run arguments as below:
+```
+docker run --rm -it 
+    --name=rest-dev-vnc-docker 
+    --restart=no 
+    -e VNC_RESOLUTION=1920x1080 
+    -e VNC_PW=vncpassword 
+    -v /home/user1/data-docker/rest-dev-vnc-docker/.eclipse:/home/developer/.eclipse 
+    -v /home/user1/data-docker/rest-dev-vnc-docker/eclipse-workspace:/home/developer/eclipse-workspace 
+    -p 5901:5901 
+    -p 6901:6901 
+    openkbs/rest-dev-vnc-docker
+```
+
+# Deployment over Openshift or Kubernetes
+You need to manually provide the environment variables for deployment (since run.sh automatically aggregate all the needed variables for running the PyCharm docker container to ensure the persistent information stayed with the host directories even you delete the container instances.
+Here is what you need to setup in Openshift "deployment" configuration GUI or YAML template (from docker-compose.yaml file below):
+```
+    volumes:
+      -v <Your File Directory>/data:/home/developer/data
+      -v <Your File Directory>/workspace:/home/developer/workspace
+      -v <Your File Directory>/data-docker/rest-dev-vnc-docker/.eclipse:/home/developer/.eclipse 
+      -v <Your File Directory>/data-docker/rest-dev-vnc-docker/eclipse-workspace:/home/developer/eclipse-workspace 
+      -p 5901:5901
+      -p 6901:6901 
+```
+ 
 
 ## Connect to VNC Viewer/Client or noVNC (Browser-based VNC)
 * connect via VNC viewer localhost:5901, default password: vncpassword
@@ -93,9 +129,10 @@ VNC_PW, default: vncpassword , e.g., change to MySpecial!(Password%)
 Two ways to change Screen resolutions.
 
 ## 1.) Modify ./run.sh file
+(file ./
 ```
 #VNC_RESOLUTION="1280x1024"
-VNC_RESOLUTION="1920x1280"
+VNC_RESOLUTION=1920x1280
 ```
 
 ## 2.) Customize Openshift or Kubernetes container run envionrment
@@ -204,23 +241,27 @@ However, for larger complex projects, you might want to consider to use Docker-b
 * [Running GUI apps in Docker containers using VNC](http://blog.fx.lv/2017/08/running-gui-apps-in-docker-containers-using-vnc/)
 * [Docker-headless-VNC-Container](https://github.com/DrSnowbird/docker-headless-vnc-container)
 
-# See also similar docker-based IDE
+# See also X11 and VNC/noVNC docker-based IDE collections
 * [openkbs/docker-atom-editor](https://hub.docker.com/r/openkbs/docker-atom-editor/)
 * [openkbs/eclipse-oxygen-docker](https://hub.docker.com/r/openkbs/eclipse-oxygen-docker/)
+* [openkbs/eclipse-phonto-vnc-docker](https://cloud.docker.com/u/openkbs/repository/docker/openkbs/eclipse-photon-vnc-docker)
 * [openkbs/eclipse-photon-docker](https://hub.docker.com/r/openkbs/eclipse-photon-docker/)
 * [openkbs/eclipse-photon-vnc-docker](https://hub.docker.com/r/openkbs/eclipse-photon-vnc-docker/)
 * [openkbs/intellj-docker](https://hub.docker.com/r/openkbs/intellij-docker/)
 * [openkbs/intellj-vnc-docker](https://hub.docker.com/r/openkbs/intellij-vnc-docker/)
-* [openkbs/knime-vnc-docker](https://hub.docker.com/r/openkbs/knime-vnc-docker/)
+* [openkbs/knime-vnc-docker](https://cloud.docker.com/u/openkbs/repository/docker/openkbs/knime-vnc-docker)
+* [openkbs/mysql-workbench-vnc-docker](https://cloud.docker.com/u/openkbs/repository/docker/openkbs/mysql-workbench-vnc-docker)
 * [openkbs/netbeans10-docker](https://hub.docker.com/r/openkbs/netbeans10-docker/)
 * [openkbs/netbeans](https://hub.docker.com/r/openkbs/netbeans/)
 * [openkbs/papyrus-sysml-docker](https://hub.docker.com/r/openkbs/papyrus-sysml-docker/)
 * [openkbs/pycharm-docker](https://hub.docker.com/r/openkbs/pycharm-docker/)
+* [openkbs/pycharm-vnc-docker](https://cloud.docker.com/u/openkbs/repository/docker/openkbs/pycharm-vnc-docker)
 * [openkbs/rapidminer-docker](https://cloud.docker.com/u/openkbs/repository/docker/openkbs/rapidminer-docker)
 * [openkbs/scala-ide-docker](https://hub.docker.com/r/openkbs/scala-ide-docker/)
 * [openkbs/sublime-docker](https://hub.docker.com/r/openkbs/sublime-docker/)
 * [openkbs/webstorm-docker](https://hub.docker.com/r/openkbs/webstorm-docker/)
-* [openkbs/webstorm-vnc-docker](https://hub.docker.com/r/openkbs/webstorm-vnc-docker/)
+* [openkbs/webstorm-vnc-docker](https://cloud.docker.com/u/openkbs/repository/docker/openkbs/webstorm-vnc-docker)
+* [openkbs/rest-dev-vnc-docker](https://cloud.docker.com/u/openkbs/repository/docker/openkbs/rest-dev-vnc-docker)
 
 # See Also - Docker-based SQL GUI
 * [Sqlectron SQL GUI at openkbs/sqlectron-docker](https://hub.docker.com/r/openkbs/sqlectron-docker/)
