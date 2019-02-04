@@ -1,7 +1,8 @@
 
-# SOAP / REST API Development with common tools within VNC/noVNC-based Docker
-* SOAP-UI + Swagger-Editor + Atom + Eclipse Photon + Java 8 + Maven 3 + Python 3 + npm 6+ node 10 + Gradle 5 + noVNC/VNC (as Cluster Container Desktop)
 [![](https://images.microbadger.com/badges/image/openkbs/rest-dev-vnc-docker.svg)](https://microbadger.com/images/openkbs/rest-dev-vnc-docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/rest-dev-vnc-docker.svg)](https://microbadger.com/images/openkbs/rest-dev-vnc-docker "Get your own version badge on microbadger.com")
+
+# SOAP / REST API Development with common tools within VNC/noVNC-based Docker
+* SOAP-UI + Swagger-Editor + Atom + Eclipse Photon + Java 8 + Maven 3 + Python 3 + npm 6 + node 11 + Gradle 5 + noVNC/VNC (as Cluster Container Desktop)
 
 # License Agreement
 By using this image, you agree the [Oracle Java JDK License](http://www.oracle.com/technetwork/java/javase/terms/license/index.html).
@@ -21,7 +22,7 @@ The followings are available now for REST Development and more will be added eit
 ./components
 ├── app-postman.sh
 ├── ide-atom.sh
-├── ide-eclipse.sh
+├── ide-eclipse.sh (optional)
 ├── json-editor.sh
 ├── mongodb-compass-gui.sh
 ├── nosql-mongodb-Ubuntu-16.sh
@@ -45,7 +46,7 @@ If needed again, you just run each needed component setup script, e.g.,
   Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
 * Apache Maven 3.6.0
 * Python 3.5.2
-* npm 6.4.1 + node v10.15.0 (from NodeSource official Node Distribution)
+* npm 6.5.0 + node v11.8.0 (from NodeSource official Node Distribution)
 * Gradle 5.1
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 * noVNC/VNC (as Cluster Container Desktop)
@@ -78,20 +79,30 @@ docker run --rm -it
     -p 6901:6901 
     openkbs/rest-dev-vnc-docker
 ```
+# Run - Override VNC environment variables 
+The following VNC environment variables can be overwritten at the docker run phase to customize your desktop environment inside the container. You can change those variables using configurations CLI or Web-GUI with OpenShift, Kubernetes, DC/OS, etc. For standalone deployment, e.g. using "./run.sh" (with Portainer to manage), again, you just modify "./docker-run.env" file's entries as described above.
+```
+VNC_COL_DEPTH, default is 24 , e.g., change to 16,
+    -e VNC_COL_DEPTH=16
+VNC_RESOLUTION, default: 1920x1080 , e.g., change to 1280x1024
+    -e VNC_RESOLUTION=1280x1024
+VNC_PW, default: vncpassword , e.g., change to MySpecial!(Password%)
+    -e VNC_PW=MySpecial!(Password%)
+```
 
 # Deployment over Openshift or Kubernetes
 You need to manually provide the environment variables for deployment (since run.sh automatically aggregate all the needed variables for running the PyCharm docker container to ensure the persistent information stayed with the host directories even you delete the container instances.
 Here is what you need to setup in Openshift "deployment" configuration GUI or YAML template (from docker-compose.yaml file below):
 ```
     volumes:
-      -v <Your File Directory>/data:/home/developer/data
-      -v <Your File Directory>/workspace:/home/developer/workspace
-      -v <Your File Directory>/data-docker/rest-dev-vnc-docker/.eclipse:/home/developer/.eclipse 
-      -v <Your File Directory>/data-docker/rest-dev-vnc-docker/eclipse-workspace:/home/developer/eclipse-workspace 
+      -v <Your NFS/File Directory>/data:/home/developer/data
+      -v <Your NFS/File Directory>/workspace:/home/developer/workspace
+      -v <Your NFS/File Directory>/data-docker/rest-dev-vnc-docker/.eclipse:/home/developer/.eclipse 
+      -v <Your NFS/File Directory>/data-docker/rest-dev-vnc-docker/eclipse-workspace:/home/developer/eclipse-workspace 
       -p 5901:5901
       -p 6901:6901 
 ```
- 
+(Note: We will add Openshifpt / Kubernetes templates soon for your convience to deploy.)
 
 ## Connect to VNC Viewer/Client or noVNC (Browser-based VNC)
 * connect via VNC viewer localhost:5901, default password: vncpassword
@@ -107,17 +118,6 @@ e.g.
 => similarly for Kubernetes Container Platform: (similar to the Openshift above!)
 ```
 
-# Run - Override VNC environment variables 
-The following VNC environment variables can be overwritten at the docker run phase to customize your desktop environment inside the container. You can change those variables using configurations CLI or Web-GUI with OpenShift, Kubernetes, DC/OS, etc.
-```
-VNC_COL_DEPTH, default is 24 , e.g., change to 16,
-    -e VNC_COL_DEPTH=16
-VNC_RESOLUTION, default: 1920x1080 , e.g., change to 1280x1024
-    -e VNC_RESOLUTION=1280x1024
-VNC_PW, default: vncpassword , e.g., change to MySpecial!(Password%)
-    -e VNC_PW=MySpecial!(Password%)
-```
-
 # Use Cases - Virtual/Physical Class setup
 ## One-Container-for-Each-Student:
 * For standalone container, you just need to spin up, say, 18 containers, one for each student VNC/noVNC, each with different host ports, 6901, 6902, .., 6918 for noNVC ports.
@@ -128,10 +128,9 @@ VNC_PW, default: vncpassword , e.g., change to MySpecial!(Password%)
 # Screen (Desktop) Resolution
 Two ways to change Screen resolutions.
 
-## 1.) Modify ./run.sh file
-(file ./
+## 1.) Modify ./docker-run.env file
 ```
-#VNC_RESOLUTION="1280x1024"
+#VNC_RESOLUTION=1280x1024
 VNC_RESOLUTION=1920x1280
 ```
 
@@ -270,7 +269,7 @@ However, for larger complex projects, you might want to consider to use Docker-b
 
 # Releases information
 ```
-root@1b69cb491038:/usr# ./printVersions.sh 
+developer@cf5bc1c3dd9f:~$ /usr/printVersions.sh 
 + echo JAVA_HOME=/usr/java
 JAVA_HOME=/usr/java
 + java -version
@@ -281,17 +280,26 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
 Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T18:41:47Z)
 Maven home: /usr/apache-maven-3.6.0
 Java version: 1.8.0_201, vendor: Oracle Corporation, runtime: /usr/jdk1.8.0_201/jre
-Default locale: en_US, platform encoding: ANSI_X3.4-1968
+Default locale: en_US, platform encoding: UTF-8
 OS name: "linux", version: "4.15.0-43-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.12
 + python3 -V
 Python 3.5.2
 + pip --version
-pip 18.1 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+pip 19.0.1 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 + pip3 --version
-pip 18.1 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+pip 19.0.1 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 + gradle --version
+
+Welcome to Gradle 5.1.1!
+
+Here are the highlights of this release:
+ - Control which dependencies can be retrieved from which repositories
+ - Production-ready configuration avoidance APIs
+
+For more details see https://docs.gradle.org/5.1.1/release-notes.html
+
 
 ------------------------------------------------------------
 Gradle 5.1.1
@@ -308,9 +316,9 @@ JVM:          1.8.0_201 (Oracle Corporation 25.201-b09)
 OS:           Linux 4.15.0-43-generic amd64
 
 + npm -v
-6.4.1
+6.5.0
 + node -v
-v10.15.0
+v11.8.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
@@ -330,4 +338,6 @@ UBUNTU_CODENAME=xenial
 
 ```
 
-
+# Known Issues
+* Current releases' the VNC port 5901 is not function correctly. However, port 6901 for noVNC / HTML5 is working correctly. Hence, for now, you have to use noVNC/HTML5 web browser with port 6901 to access the container.
+* Also, CentOS Dockerfile build still has some connection crash issue. We recommend to use the default build (Ubuntu version's Dockerfile - the default).
