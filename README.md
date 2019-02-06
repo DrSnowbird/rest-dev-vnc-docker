@@ -166,73 +166,18 @@ To run your own image, say, with some-rest-dev-vnc-docker:
 
 ```bash
 mkdir ./data
-docker run -d --name some-rest-dev-vnc-docker -v $PWD/data:/data -i -t my/jdk-mvn-py3
+docker run -d --name some-rest-dev-vnc-docker -v $PWD/data:/data -i -t my/rest-dev-vnc-docker
 ```
 
-## Shell into the Docker instance
+## Shell or Logging into the Docker instance
 
 ```bash
+./shell.sh
+./logs.sh
+or
+
 docker exec -it some-rest-dev-vnc-docker /bin/bash
 ```
-
-## Run Python code
-
-To run Python code
-
-```bash
-docker run -it --rm openkbs/rest-dev-vnc-docker python3 -c 'print("Hello World")'
-```
-
-or,
-
-```bash
-docker run -i --rm openkbs/rest-dev-vnc-docker python3 < myPyScript.py
-```
-
-or,
-
-```bash
-mkdir ./data
-echo "print('Hello World')" > ./data/myPyScript.py
-docker run -it --rm --name some-rest-dev-vnc-docker -v "$PWD"/data:/data openkbs/rest-dev-vnc-docker python3 myPyScript.py
-```
-
-or,
-
-```bash
-alias dpy3='docker run --rm openkbs/rest-dev-vnc-docker python3'
-dpy3 -c 'print("Hello World")'
-```
-
-## Compile or Run java while no local installation needed
-Remember, the default working directory, /data, inside the docker container -- treat is as "/".
-So, if you create subdirectory, "./data/workspace", in the host machine and
-the docker container will have it as "/data/workspace".
-
-```java
-#!/bin/bash -x
-mkdir ./data
-cat >./data/HelloWorld.java <<-EOF
-public class HelloWorld {
-   public static void main(String[] args) {
-      System.out.println("Hello, World");
-   }
-}
-EOF
-cat ./data/HelloWorld.java
-alias djavac='docker run -it --rm --name some-rest-dev-vnc-docker -v '$PWD'/data:/data openkbs/rest-dev-vnc-docker javac'
-alias djava='docker run -it --rm --name some-rest-dev-vnc-docker -v '$PWD'/data:/data openkbs/rest-dev-vnc-docker java'
-
-djavac HelloWorld.java
-djava HelloWorld
-```
-And, the output:
-```
-Hello, World
-```
-Hence, the alias above, "djavac" and "djava" is your docker-based "javac" and "java" commands and
-it will work the same way as your local installed Java's "javac" and "java" commands.
-However, for larger complex projects, you might want to consider to use Docker-based IDE.
 
 # Reference
 * [VNC / NoVNC](https://github.com/novnc/noVNC)
@@ -248,6 +193,7 @@ However, for larger complex projects, you might want to consider to use Docker-b
 * [openkbs/eclipse-photon-vnc-docker](https://hub.docker.com/r/openkbs/eclipse-photon-vnc-docker/)
 * [openkbs/intellj-docker](https://hub.docker.com/r/openkbs/intellij-docker/)
 * [openkbs/intellj-vnc-docker](https://hub.docker.com/r/openkbs/intellij-vnc-docker/)
+* [openkbs/knime-docker](https://cloud.docker.com/u/openkbs/repository/docker/openkbs/knime-docker)
 * [openkbs/knime-vnc-docker](https://cloud.docker.com/u/openkbs/repository/docker/openkbs/knime-vnc-docker)
 * [openkbs/mysql-workbench-vnc-docker](https://cloud.docker.com/u/openkbs/repository/docker/openkbs/mysql-workbench-vnc-docker)
 * [openkbs/netbeans10-docker](https://hub.docker.com/r/openkbs/netbeans10-docker/)
@@ -341,3 +287,4 @@ UBUNTU_CODENAME=xenial
 # Known Issues
 * Current releases' the VNC port 5901 is not function correctly. However, port 6901 for noVNC / HTML5 is working correctly. Hence, for now, you have to use noVNC/HTML5 web browser with port 6901 to access the container.
 * Also, CentOS Dockerfile build still has some connection crash issue. We recommend to use the default build (Ubuntu version's Dockerfile - the default).
+* If you are running container or Openshift or Kubernetes behind your corporate Proxy Servers, you might need to modify Dockerfile to inject the information about Proxy Servers so that the container will function properly if it needs to pull in more packages - this is beyond that container can provide about your proxy servers information, sorry!
