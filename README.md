@@ -62,7 +62,7 @@ It's highly recommended to change tvnc password to prevent others usign the defa
 #### ---- VNC Password ----
 VNC_PW=MySuperStrongPassword
 ```
-* Once the above build is done, you can run IntelliJ now using the command below.
+* Once the above build is done, you can run now using the command below.
 ```
 ./run.sh
 ```
