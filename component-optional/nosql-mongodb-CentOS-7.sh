@@ -1,5 +1,9 @@
 #!/bin/bash -x
 
+echo "####################### Components: $(basename $0) ###########################"
+
+echo ">>>> Who am i: `whoami` ; UID=`id -u` ; GID=`id -g`"
+
 MONGODB_VERSION=4.0
 
 if [ ! -s /usr/bin/mongod ]; then

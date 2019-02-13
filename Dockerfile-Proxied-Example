@@ -1,0 +1,115 @@
+FROM openkbs/jdk-mvn-py3-vnc
+
+MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
+
+#### ============================================================================ ####
+#### ================ (BEGIN: Corporate Proxy & Certificate Setup) ================ ####
+#### ============================================================================ ####
+
+#### -------------------------------------------------- ####
+#### ---- Your Corporate HTTP/HTTPS Proxy setup:   ---- ####
+#### -------------------------------------------------- ####
+#### (Examples):
+#### ENV PROXY_DEFAULT=http://gatekeepr.openkbs.org:80
+#### ENV NO_PROXY_DEFAULT="localhost,127.0.0.1,*.openkbs.org"
+####
+#### -------------------------------------------------- ####
+#### (Default build empty - no corproate proxy)         ####
+ENV PROXY_DEFAULT=
+ENV NO_PROXY_DEFAULT=
+
+ENV HTTPS_PROXY=${HTTPS_PROXY:-${PROXY_DEFAULT}}
+ENV https_proxy=${https_proxy:-${PROXY_DEFAULT}}
+ENV HTTP_PROXY=${HTTP_PROXY:-${PROXY_DEFAULT}}
+ENV http_proxy=${http_proxy:-${PROXY_DEFAULT}}
+ENV NO_PROXY=${no_proxy:-"${NO_PROXY_DEFAULT)"}}
+ENV no_proxy=${no_proxy:-"${NO_PROXY_DEFAULT)"}}
+
+#### -------------------------------------------------- ####
+#### ---- Your Corporate Proxy Certificates setup: ---- ####
+#### -------------------------------------------------- ####
+#### (Examples):
+####
+#RUN export HTTPS_PROXY=${HTTPS_PROXY} && \
+#    export HTTP_PROXY=${HTTPS_PROXY} && \
+#    export NO_PROXY=${HTTPS_PROXY} && \
+
+#### 
+#       /usr/share/ca-certificates
+#                     Directory of CA certificates.
+#       /usr/local/share/ca-certificates
+#                     Directory of local CA certificates (with .crt extension).
+# (Ubuntu):
+ENV CERTIFICATE_DIR=/usr/local/share/ca-certificates
+# (CentOS) ENV CERTIFICATE_DIR=/etc/pki/ca-trust/source/anchors
+RUN sudo mkdir -p ${CERTIFICATE_DIR} && \
+    sudo curl -O {CERTIFICATE_DIR}/OPENKBS-BA-Root.crt http://pki.openkbs.org/OPENKBS%20BA%20Root.crt && \
+    sudo curl -O ${CERTIFICATE_DIR}/OPENKBS-BA-NPE-CA-3.crt http://pki.openkbs.org/OPENKBS%20BA%20NPE%20CA-3.crt && \
+    sudo curl -O ${CERTIFICATE_DIR}/OPENKBS-BA-NPE-CA-4.crt http://pki.openkbs.org/OPENKBS%20BA%20NPE%20CA-4.crt && \
+    sudo update-ca-certificates
+
+#### ============================================================================ ####
+#### ================ (END: Corporate Proxy & Certificate Setup) ================ ####
+#### ============================================================================ ####
+
+#### -------------------------
+#### ---- user: developer ----
+#### -------------------------
+
+ENV USER=${USER:-developer}
+ENV HOME=/home/${USER}
+
+##################################
+#### ---- Components: ----    ####
+##################################
+
+USER ${USER}
+WORKDIR ${HOME}
+
+COPY components ${HOME}/components
+COPY scripts ${HOME}/scripts
+
+RUN (sudo find /usr/share -type d -user 4011 -maxdepth 1 && sudo chown root:root /usr /usr/share) && \
+    sudo chown -R ${USER}:${USER} ${HOME}/components ${HOME}/scripts && \
+    chmod +x ${HOME}/components/*.sh ${HOME}/scripts/*.sh && \
+    sudo chown -R $USER:$(id -gn $USER) ${HOME}/.config
+
+## -- proxy setup : --
+## -- (Uncomment the following block to setup Proxy Server)
+#RUN cd scripts ; ./setup_apt-get_proxy.sh
+
+#RUN sudo /usr/bin/npm config set proxy ${http_proxy} && \
+#    sudo /usr/bin/npm config set http_proxy ${http_proxy} && \
+#    sudo /usr/bin/npm config set https_proxy ${https_proxy}
+
+## -- install components: --
+RUN cd components ; ./app-postman.sh install
+RUN cd components ; ./ide-atom.sh install
+# RUN cd components ; ./ide-eclipse.sh install
+RUN cd components ; ./soap-ui.sh install
+RUN cd components ; ./json-editor.sh install
+RUN cd components ; ./nosql-mongodb-Ubuntu-16.sh
+RUN cd components ; ./mongodb-compass-gui.sh install
+RUN cd components ; ./swagger-editor.sh install
+# RUN cd components ; ./swagger-ui.sh install
+
+## Correct the problem VNC/noVNC chown ownship of /usr/share with 4011 and now back to root
+COPY ./wrapper_process.sh ${HOME}/scripts/wrapper_process.sh
+
+## -- tidy up permision/ownerships: --
+RUN sudo chown root:root /usr /usr/share && \
+    sudo chown -R root:root $(find /usr/share -type d -user 4011 -maxdepth 1) && \
+    #sudo usermod -aG root ${USER} && \
+    sudo chmod +x ${HOME}/scripts/wrapper_process.sh && \
+    sudo chown -R $USER:$USER $HOME/.config ${HOME}/scripts/wrapper_process.sh
+
+##################################
+####     ---- VNC: ----       ####
+##################################
+
+USER ${USER}
+WORKDIR ${HOME}
+
+ENTRYPOINT ["/dockerstartup/vnc_startup.sh"]
+
+CMD "${HOME}/scripts/wrapper_process.sh"

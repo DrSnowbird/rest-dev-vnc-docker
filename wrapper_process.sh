@@ -1,16 +1,15 @@
 #!/bin/bash
 
+echo "####################### Main Process: $(basename $0) ###########################"
+
 printenv
 
-/bin/bash -c "${HOME}/components/app-postman.sh"
-/bin/bash -c "${HOME}/components/ide-atom.sh"
-/bin/bash -c "${HOME}/components/json-editor.sh"
-/bin/bash -c "${HOME}/components/soap-ui.sh"
-/bin/bash -c "${HOME}/components/swagger-editor.sh"
-#/bin/bash -c "${HOME}/components/swagger-ui.sh"
-/bin/bash -c "${HOME}/components/mongodb-compass-gui.sh"
+echo ">>>> Who am i: `whoami` ; UID=`id -u` ; GID=`id -g`"
 
-#/bin/bash -c "${HOME}/components/ide-eclipse.sh"
-#/bin/bash -c "/opt/eclipse/eclipse"
+echo ">>>> Active Components / tools in folder ${COMPONENT_DIR}:"
+
+for active in `cat ${SCRIPT_DIR}/components.list | grep -v '^#'`; do
+    ${COMPONENT_DIR}/$(basename $active)
+done
 
 tail -f /dev/null

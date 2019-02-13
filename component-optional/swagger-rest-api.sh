@@ -1,15 +1,19 @@
 #!/bin/bash
 
+echo "####################### Components: $(basename $0) ###########################"
+
+echo ">>>> Who am i: `whoami` ; UID=`id -u` ; GID=`id -g`"
+
 #### Swagger-based REST API / NPM ####
 # Ref: https://www.npmjs.com/package/swagger
 
-if [ "$1" = "install" ]; then
-    if [ ! -s $HOME/$(basename $0).installed ]; then
-        sudo npm install -g swagger
-        sudo npm install -g swagger-editor-dist
-    else
-        echo "... Installed before already! ..."
-    fi
+ACTION=${1:-install}
+if [ "$ACTION" = "install" ] && [ ! -s $HOME/$(basename $0).installed ]; then
+    npm install -g swagger
+    npm install -g swagger-editor-dist
+    
+    echo "... Installed before already! ..."
+    touch $HOME/$(basename $0).installed
     exit 0
 fi
 

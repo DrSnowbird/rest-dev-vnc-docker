@@ -2,45 +2,64 @@ FROM openkbs/jdk-mvn-py3-vnc
 
 MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
 
-#### -------------------------
-#### ---- user: developer ----
-#### -------------------------
+###############################
+#### ---- User setup: ---- ####
+###############################
 ENV USER=${USER:-developer}
 ENV HOME=/home/${USER}
 
-##################################
-#### ---- Components: ----    ####
-##################################
-COPY wrapper_process.sh /
-RUN (sudo find /usr/share -type d -user 4011 -maxdepth 1 && sudo chown root:root /usr /usr/share)  
+#### ---- Install Directory: ---- ####
+ENV INSTALL_DIR=${HOME}
+
+#### ---- App Preparation: ---- ####
+ENV PRODUCT_NAME=${PRODUCT_NAME:-rest-dev-vnc-docker}
+ENV PRODUCT_HOME=${PRODUCT_HOME:-${INSTALL_DIR}/${PRODUCT_NAME}}
+ENV SCRIPT_DIR=${SCRIPT_DIR:-${PRODUCT_HOME}/script}
+ENV COMPONENT_DIR=${COMPONENT_DIR:-${PRODUCT_HOME}/component}
+ENV NPM_PREFIX=${COMPONENT_DIR:-${PRODUCT_HOME}/npm}}
 
 USER ${USER}
 WORKDIR ${HOME}
 
-COPY components ${HOME}/components
-RUN sudo chown -R ${USER}:${USER} ${HOME}/components && chmod 0755 ${HOME}/components/*.sh 
-RUN cd components ; ./app-postman.sh install
-RUN cd components ; ./ide-atom.sh install
-RUN cd components ; ./soap-ui.sh install
-RUN cd components ; ./json-editor.sh install
-RUN cd components ; ./mongodb-compass-gui.sh install
-RUN cd components ; ./nosql-mongodb-Ubuntu-16.sh install
-RUN cd components ; ./swagger-editor.sh install
-# RUN cd components ; ./swagger-ui.sh install
+#### ---- Transfer setup ---- ####
+COPY ./script ${SCRIPT_DIR}
+COPY ./component ${COMPONENT_DIR}
+COPY ./wrapper_process.sh ${PRODUCT_HOME}/wrapper_process.sh
 
-## Correct the problem VNC/noVNC chown ownship of /usr/share with 4011 and now back to root
+#### ---- Permissions setup: ---- ####
+RUN echo "`id -u`" && echo "`id -g`" && \
+    sudo chown -R ${USER}:${USER} ${PRODUCT_HOME} ${HOME}/.config ${PRODUCT_HOME}/wrapper_process.sh && \
+    sudo chmod +x ${PRODUCT_HOME}/*.sh ${SCRIPT_DIR}/*.sh ${COMPONENT_DIR}/*.sh && \
+    ln -s ${PRODUCT_HOME}/wrapper_process.sh ${HOME}/wrapper_process.sh && \
+    sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium && \
+    sudo find /usr/share -type d -user 4011 -maxdepth 1 && { [ $? -eq 0 ] && sudo chown root:root /usr /usr/share; }
+    
+# RUN sudo chown -R ${USER}:$(id -gn ${USER}) ${HOME}/.config 
 
-RUN sudo chown root:root /usr /usr/share && \
-    sudo chown -R root:root $(find /usr/share -type d -user 4011 -maxdepth 1) && \
-    sudo chown -R $USER:$USER $HOME/.config
+#### ---- Apt (Ubuntu) Proxy setup ---- ####
+RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_apt_proxy.sh && \
+    sudo apt-get update --fix-missing -y
 
-WORKDIR ${HOME}
+#### ---- NPM Proxy & NPM Permission setup: ---- ####
+RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_proxy.sh
+RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_with_no_sudo.sh
 
+#### ---- Components Install: ---- ####
+RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/install-component-active.sh
+
+#### ---- Permissions tidy up ---- ####
+#RUN sudo chown -R root:root $(find /usr/share -type d -user 4011 -maxdepth 1)
+    
 ##################################
 ####     ---- VNC: ----       ####
 ##################################
+USER ${USER}
+WORKDIR ${HOME}
 
 ENTRYPOINT ["/dockerstartup/vnc_startup.sh"]
 
-CMD ["/wrapper_process.sh"]
+##################################
+####     ---- Start: ----     ####
+##################################
+CMD "${HOME}/wrapper_process.sh"
 

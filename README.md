@@ -17,20 +17,24 @@ The idea is to use Docker with VNC/noVNC to aggregate all the needed and related
 **The use-cases of this kind of VNC/noVNC docker container is just limited by your imaginations and your device or networking limitations. Virtually it's accessbile ubiquitously from Your favorite smartphones, tablets, e.g., iPad, SurfacePro, Amazon Fire tablet, Chrome PC, Desktop PC, etc. (Hmmm! in theory, if you can read tiny screens, you can even use your Apple iWatch to use KNIME, Eclipse Photon, IntelliJ, etc. as long as it can display HTML-5 Web Browsers!**
 
 # REST Tools / Components
-The followings are available now for REST Development and more will be added either as default or optional under the "**./components**" directory:
+* The followings are available now for REST Development and more will be added either as default or optional under the "**./components **" (optional) and "**./components-active" (Deployed) directories.
 ```
 ./components
+├── ide-eclipse.sh
+├── nosql-mongodb-CentOS-7.sh
+├── nosql-mongodb-Ubuntu-16.sh
+├── sample-rest-api.sh
+├── swagger-editor.sh
+├── swagger-rest-api.sh
+└── swagger-ui.sh
+
+./components-active
+├── api-workbench.sh
 ├── app-postman.sh
 ├── ide-atom.sh
-├── ide-eclipse.sh (optional)
 ├── json-editor.sh
 ├── mongodb-compass-gui.sh
-├── nosql-mongodb-Ubuntu-16.sh
-├── sample-rest-api.sh (optional)
-├── soap-ui.sh
-├── swagger-editor.sh
-├── swagger-rest-api.sh (optional)
-└── swagger-ui.sh (optional)
+└── soap-ui.sh
 
 ```
 If needed again, you just run each needed component setup script, e.g.,
@@ -179,7 +183,14 @@ or
 docker exec -it some-rest-dev-vnc-docker /bin/bash
 ```
 
+
 # Reference
+* [RAML APIs](https://raml.org/)
+* [API-Workbench for RAML](http://apiworkbench.com/docs/)
+* [OpenAPI Specification (OAS)](https://en.wikipedia.org/wiki/OpenAPI_Specification)
+* [OAI/OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification)
+* [Swagger OpenAPI Editor, UI](https://swagger.io/)
+* [SoapUI](https://www.soapui.org/)
 * [VNC / NoVNC](https://github.com/novnc/noVNC)
 * [ConSol docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container)
 * [Running GUI apps in Docker containers using VNC](http://blog.fx.lv/2017/08/running-gui-apps-in-docker-containers-using-vnc/)
