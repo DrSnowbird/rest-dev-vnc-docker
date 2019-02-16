@@ -1,8 +1,7 @@
-
 [![](https://images.microbadger.com/badges/image/openkbs/rest-dev-vnc-docker.svg)](https://microbadger.com/images/openkbs/rest-dev-vnc-docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/rest-dev-vnc-docker.svg)](https://microbadger.com/images/openkbs/rest-dev-vnc-docker "Get your own version badge on microbadger.com")
 
 # SOAP / REST API Development with common tools within VNC/noVNC-based Docker
-* SOAP-UI + Swagger-Editor + Atom + Eclipse Photon + Java 8 + Maven 3 + Python 3 + npm 6 + node 11 + Gradle 5 + noVNC/VNC (as Cluster Container Desktop)
+* SOAP-UI + Swagger-Editor + Atom + Eclipse Photon + Java 8 (1.8.0_202) JDK + Maven 3.6 + Python 3.5 + pip 19.0 + node 11.9 + npm 6.5 + Gradle 5.2 + noVNC/VNC (as Cluster Container Desktop)
 
 # License Agreement
 By using this image, you agree the [Oracle Java JDK License](http://www.oracle.com/technetwork/java/javase/terms/license/index.html).
@@ -226,7 +225,7 @@ docker exec -it some-rest-dev-vnc-docker /bin/bash
 
 # Releases information
 ```
-developer@cf5bc1c3dd9f:~$ /usr/printVersions.sh 
+developer@7e60cd24e9c7:~/tools/api-designer$ /usr/printVersions.sh 
 + echo JAVA_HOME=/usr/java
 JAVA_HOME=/usr/java
 + java -version
@@ -238,7 +237,7 @@ Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T18:41:4
 Maven home: /usr/apache-maven-3.6.0
 Java version: 1.8.0_201, vendor: Oracle Corporation, runtime: /usr/jdk1.8.0_201/jre
 Default locale: en_US, platform encoding: UTF-8
-OS name: "linux", version: "4.15.0-43-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "4.15.0-45-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.12
 + python3 -V
@@ -270,12 +269,12 @@ Kotlin:       1.3.11
 Groovy:       2.5.4
 Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
 JVM:          1.8.0_201 (Oracle Corporation 25.201-b09)
-OS:           Linux 4.15.0-43-generic amd64
+OS:           Linux 4.15.0-45-generic amd64
 
 + npm -v
 6.5.0
 + node -v
-v11.8.0
+v11.9.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
@@ -292,7 +291,6 @@ SUPPORT_URL="http://help.ubuntu.com/"
 BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
-
 ```
 
 # Known Issues

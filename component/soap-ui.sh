@@ -61,12 +61,6 @@ function isAppRunning() {
 }
 isAppRunning
 
-exit 9999
-
-
-
-
-
 export SOAPUI_HOME=${PRODUCT_HOME}
 
 echo "... Preparing to start application ..."

@@ -18,7 +18,7 @@ PRODUCT_WORKSPACE=${HOME}/Projects/${PRODUCT}
 PRODUCT_LOG=${PRODUCT_WORKSPACE}/logs/${PRODUCT}.log
 
 ACTION=$1
-if [ ! -s ${PRODUCT_HOME}/${PRODUCT}.installed ] || [ "`which $(basename ${PRODUCT_EXE})`" = "" ] ; then
+if [ ! -s ${PRODUCT_HOME}/${PRODUCT}.installed ] || [ ! -s "${PRODUCT_HOME}/package.json" ] ; then
     mkdir -p ${INSTALL_DIR} ${PRODUCT_HOME};
     cd ${PRODUCT_HOME}
 
@@ -28,13 +28,17 @@ if [ ! -s ${PRODUCT_HOME}/${PRODUCT}.installed ] || [ "`which $(basename ${PRODU
 
     # ref: https://github.com/mulesoft/api-designer
     sudo chown -R $(whoami):$(whoami) /usr/lib/node_modules ${HOME}/.npm
-    git clone https://github.com/mulesoft/api-designer.git
-    cd api-designer
-    npm install
-    cd ${INSTALL_DIR}
-    npm install -g request
-    npm install -g api-designer
-
+    if [ ! -s ${PRODUCT_HOME}/package.json ]; then
+        rm -rf ${PRODUCT_HOME}
+        git clone https://github.com/mulesoft/api-designer.git
+        cd api-designer
+        npm install
+    
+        cd ${INSTALL_DIR}
+        npm install -g request
+        echo "PRODUCT_EXE at: `which $(basename ${PRODUCT_EXE})`"
+    fi
+    
     #### ---- (END): Application installation specific above:  ---- #####
     #####################################################################
 
@@ -77,7 +81,8 @@ PRODUCT_EXE=`which ${PRODUCT_EXE}`
 if [ -s  ${PRODUCT_EXE} ]; then
     #nohup `which ${PRODUCT_EXE}` 2>&1 > ${PRODUCT_LOG} &
     nohup ${PRODUCT_EXE} . 2>&1 > ${PRODUCT_LOG} &
-    # (no need! command above will auto start the firefox http://localhost:3000/ )
+    # firefox http://localhost:3000/
+    chrome http://localhost:3000/
 else
     echo "*** ERROR: Can't find ${PRODCUT_EXE}! Abort! ***"
 fi
