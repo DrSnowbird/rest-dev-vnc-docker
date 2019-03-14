@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 echo "####################### Components: $(basename $0) ###########################"
 
@@ -66,6 +66,7 @@ cd ${PRODUCT_WORKSPACE}
 echo "... Starting application ..."
 WAY_CHOICE=1
 cd ${PRODUCT_HOME}
+export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 if [ -s "${PRODUCT_HOME}/package.json" ]; then
     if [ ${WAY_CHOICE} -eq 1 ]; then
         # Way-1: Using NPM Server
@@ -75,7 +76,7 @@ if [ -s "${PRODUCT_HOME}/package.json" ]; then
         chromium http://localhost:3001/ &
     else
         # Way-2: Using http-server to host swagger-editor
-        nohup http-server swagger-editor
+        nohup http-server swagger-editor &
         chromium http://localhost:8080/ &
     fi
 else
@@ -95,4 +96,3 @@ echo ">>>               including Mongodb too!"
 echo ">>>    5.) ... Enjoy it also if you use that full stack!"
 echo ">>> ---------------------------------------------------------------------------------------"
 echo
-                                                                                       3,1           66%
