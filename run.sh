@@ -578,6 +578,9 @@ case "${BUILD_TYPE}" in
         docker run ${REMOVE_OPTION} ${MORE_OPTIONS} ${RUN_OPTION} \
             --name=${instanceName} \
             --restart=${RESTART_OPTION} \
+            -v $HOME/.chrome:/data \
+            -v /dev/shm:/dev/shm \
+            -v /etc/hosts:/etc/hosts \
             ${privilegedString} \
             ${USER_VARS} \
             ${ENV_VARS} \

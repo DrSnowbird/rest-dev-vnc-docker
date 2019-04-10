@@ -30,8 +30,8 @@ COPY ./wrapper_process.sh ${PRODUCT_HOME}/wrapper_process.sh
 RUN echo "`id -u`" && echo "`id -g`" && \
     sudo chown -R ${USER}:${USER} ${PRODUCT_HOME} ${HOME}/.config ${PRODUCT_HOME}/wrapper_process.sh && \
     sudo chmod +x ${PRODUCT_HOME}/*.sh ${SCRIPT_DIR}/*.sh ${COMPONENT_DIR}/*.sh && \
-    ln -s ${PRODUCT_HOME}/wrapper_process.sh ${HOME}/wrapper_process.sh && \
-    sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium && \
+    ln -sf ${PRODUCT_HOME}/wrapper_process.sh ${HOME}/wrapper_process.sh && \
+    sudo ln -sf /usr/bin/chromium-browser /usr/bin/chromium && \
     sudo find /usr/share -type d -user 4011 -maxdepth 1 && { [ $? -eq 0 ] && sudo chown root:root /usr /usr/share; }
     
 # RUN sudo chown -R ${USER}:$(id -gn ${USER}) ${HOME}/.config 

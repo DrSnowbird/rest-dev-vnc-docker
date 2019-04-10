@@ -73,11 +73,13 @@ if [ -s "${PRODUCT_HOME}/package.json" ]; then
         nohup npm start 2>&1 > ${PRODUCT_LOG} &
         echo "Swagger Editor: http://localhost:3001/"
         # (not needed for launch another chromium since npm above will auto-launch one for you!)
-        chromium http://localhost:3001/ &
+        #firefox http://localhost:3001/ &
+	`which google-chrome` --no-sandbox http://localhost:3001/ &
     else
         # Way-2: Using http-server to host swagger-editor
         nohup http-server swagger-editor &
-        chromium http://localhost:8080/ &
+        #firefox http://localhost:8080/ &
+	`which google-chrome` --no-sandbox http://localhost:8080/ &
     fi
 else
     echo "*** ERROR: Can't find ${PRODCUT_EXE}! Abort! ***"

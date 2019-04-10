@@ -15,6 +15,9 @@ services:
       - 5901:5901
       - 6901:6901
     volumes:
+      - $HOME/.chrome:/data
+      - /dev/shm:/dev/shm
+      - /etc/hosts:/etc/hosts
       - ./data:/home/developer/data
       - ./workspace:/home/developer/workspace
       - ./Projects:/home/developer/Projects
