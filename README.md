@@ -1,19 +1,15 @@
 [![](https://images.microbadger.com/badges/image/openkbs/rest-dev-vnc-docker.svg)](https://microbadger.com/images/openkbs/rest-dev-vnc-docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/rest-dev-vnc-docker.svg)](https://microbadger.com/images/openkbs/rest-dev-vnc-docker "Get your own version badge on microbadger.com")
 
 # SOAP / REST API Development with common tools within VNC/noVNC-based Docker
-* SOAP-UI + Swagger-Editor + Atom + Eclipse Photon + Java 8 (1.8.0_202) JDK + Maven 3.6 + Python 3.5 + pip 19.0 + node 11.11 + npm 6.7 + Gradle 5.2 + noVNC/VNC (as Cluster Container Desktop)
-
-# License Agreement
-By using this image, you agree the [Oracle Java JDK License](http://www.oracle.com/technetwork/java/javase/terms/license/index.html).
-This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). You must accept the [Oracle Binary Code License Agreement for Java SE](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) to use this image.
+* SOAP-UI + Swagger-Editor + Atom + Eclipse Photon + OpenJDK Java 8 (1.8.0_212) JDK + Maven 3.6 + Python 3.6/2.7 + pip 19 + node 11 + npm 6 + Gradle 5.3 + noVNC/VNC (as Cluster Container Desktop)
 
 # Concept - Dev Environment everywhere using VNC/noVNC Docker
 The idea is to use Docker with VNC/noVNC to aggregate all the needed and related Developments tools/IDEs within a single Docker as an agile way to stand up specific collections of tools quick within a Container quick computing needs, e.g.,
-* REST Development (this GIT) to cover end-to-end needs from JSON/XML, REST connection, Swagger, Mongodb, Test, etc.
+* REST Development (this GIT) to cover end-to-end needs from JSON/XML, REST connection, Swagger, MongoDB, Test, etc.
 * NLP/Semantic Development (coming soon)
 * ... and more per your imaginations or needs in your business application domains, e.g, bio-science, finance, IoT, etc.
 
-**The use-cases of this kind of VNC/noVNC docker container is just limited by your imaginations and your device or networking limitations. Virtually it's accessbile ubiquitously from Your favorite smartphones, tablets, e.g., iPad, SurfacePro, Amazon Fire tablet, Chrome PC, Desktop PC, etc. (Hmmm! in theory, if you can read tiny screens, you can even use your Apple iWatch to use KNIME, Eclipse Photon, IntelliJ, etc. as long as it can display HTML-5 Web Browsers!**
+**The use-cases of this kind of VNC/noVNC docker container is just limited by your imaginations and your device or network limitations. Virtually it's accessible ubiquitously from Your favorite smartphones, tablets, e.g., iPad, SurfacePro, Amazon Fire tablet, Chrome PC, Desktop PC, etc. (Hmmm! in theory, if you can read tiny screens, you can even use your Apple iWatch to use KNIME, Eclipse Photon, IntelliJ, etc. as long as it can display HTML-5 Web Browsers!**
 
 # REST Tools / Components
 * The followings are available now for REST Development and more will be added either as default or optional under the "**./components **" (optional) and "**./components-active" (Deployed) directories.
@@ -38,7 +34,7 @@ The idea is to use Docker with VNC/noVNC to aggregate all the needed and related
 ```
 If needed again, you just run each needed component setup script, e.g.,
 ```
-~/componetns/swagger-ui.sh
+~/components/swagger-ui.sh
 ```
 
 # Core Components
@@ -58,7 +54,7 @@ If needed again, you just run each needed component setup script, e.g.,
 This project mainly adopt the [ConSol docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) implementation.
 
 # Run (recommended for easy-start)
-It's highly recommended to change tvnc password to prevent others usign the default password to get into your container, modify the file "**./docker.env**" as below and save the filw before you hit, "./run.sh":
+It's highly recommended to change VNC password to prevent others using the default password to get into your container, modify the file "**./docker.env**" as below and save the file before you hit, "./run.sh":
 ```
 (./docker.env) file:
 
@@ -95,7 +91,7 @@ VNC_PW, default: vncpassword , e.g., change to MySpecial!(Password%)
 
 # Deployment over Openshift or Kubernetes
 You need to manually provide the environment variables for deployment (since run.sh automatically aggregate all the needed variables for running the PyCharm docker container to ensure the persistent information stayed with the host directories even you delete the container instances.
-Here is what you need to setup in Openshift "deployment" configuration GUI or YAML template (from docker-compose.yaml file below):
+Here is what you need to set up in Openshift "deployment" configuration GUI or YAML template (from docker-compose.yaml file below):
 ```
     volumes:
       -v <Your NFS/File Directory>/data:/home/developer/data
@@ -137,7 +133,7 @@ Two ways to change Screen resolutions.
 VNC_RESOLUTION=1920x1280
 ```
 
-## 2.) Customize Openshift or Kubernetes container run envionrment
+## 2.) Customize Openshift or Kubernetes container run environment
 ```
 Set up, say, VNC_RESOLUTION with value 1920x1280
 ```
@@ -225,77 +221,60 @@ docker exec -it some-rest-dev-vnc-docker /bin/bash
 
 # Releases information
 ```
-developer@d5af2b035147:~$ /usr/scripts/printVersions.sh 
-+ echo JAVA_HOME=/usr/java
-JAVA_HOME=/usr/java
+developer@4542c85148f5:~$ /usr/scripts/printVersions.sh 
++ echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + java -version
-java version "1.8.0_202"
-Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
-Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
+openjdk version "1.8.0_212"
+OpenJDK Runtime Environment (build 1.8.0_212-8u212-b03-0ubuntu1.18.04.1-b03)
+OpenJDK 64-Bit Server VM (build 25.212-b03, mixed mode)
 + mvn --version
 Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T18:41:47Z)
 Maven home: /usr/apache-maven-3.6.0
-Java version: 1.8.0_202, vendor: Oracle Corporation, runtime: /usr/jdk1.8.0_202/jre
-Default locale: en_US, platform encoding: UTF-8
-OS name: "linux", version: "4.15.0-46-generic", arch: "amd64", family: "unix"
+Java version: 1.8.0_212, vendor: Oracle Corporation, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+Default locale: en, platform encoding: UTF-8
+OS name: "linux", version: "4.18.0-20-generic", arch: "amd64", family: "unix"
 + python -V
-Python 2.7.12
+Python 2.7.15rc1
 + python3 -V
-Python 3.5.2
+Python 3.6.7
 + pip --version
-pip 19.0.3 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+pip 19.1.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + pip3 --version
-pip 19.0.3 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+pip 19.1.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
 
-Welcome to Gradle 5.2.1!
+Welcome to Gradle 5.3.1!
 
 Here are the highlights of this release:
- - Define sets of dependencies that work together with Java Platform plugin
- - New C++ plugins with dependency management built-in
- - New C++ project types for gradle init
- - Service injection into plugins and project extensions
+ - Feature variants AKA "optional dependencies"
+ - Type-safe accessors in Kotlin precompiled script plugins
+ - Gradle Module Metadata 1.0
 
-For more details see https://docs.gradle.org/5.2.1/release-notes.html
+For more details see https://docs.gradle.org/5.3.1/release-notes.html
 
 
 ------------------------------------------------------------
-Gradle 5.2.1
+Gradle 5.3.1
 ------------------------------------------------------------
 
-Build time:   2019-02-08 19:00:10 UTC
-Revision:     f02764e074c32ee8851a4e1877dd1fea8ffb7183
+Build time:   2019-03-28 09:09:23 UTC
+Revision:     f2fae6ba563cfb772c8bc35d31e43c59a5b620c3
 
-Kotlin DSL:   1.1.3
-Kotlin:       1.3.20
+Kotlin:       1.3.21
 Groovy:       2.5.4
 Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
-JVM:          1.8.0_202 (Oracle Corporation 25.202-b08)
-OS:           Linux 4.15.0-46-generic amd64
+JVM:          1.8.0_212 (Oracle Corporation 25.212-b03)
+OS:           Linux 4.18.0-20-generic amd64
 
 + npm -v
 6.7.0
 + node -v
-v11.11.0
-+ cat /etc/lsb-release /etc/os-release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=16.04
-DISTRIB_CODENAME=xenial
-DISTRIB_DESCRIPTION="Ubuntu 16.04.3 LTS"
-NAME="Ubuntu"
-VERSION="16.04.3 LTS (Xenial Xerus)"
-ID=ubuntu
-ID_LIKE=debian
-PRETTY_NAME="Ubuntu 16.04.3 LTS"
-VERSION_ID="16.04"
-HOME_URL="http://www.ubuntu.com/"
-SUPPORT_URL="http://help.ubuntu.com/"
-BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
-VERSION_CODENAME=xenial
-UBUNTU_CODENAME=xenial
+v11.15.0
 ```
 
 # Known Issues
 * Current releases' the VNC port 5901 is not function correctly. However, port 6901 for noVNC / HTML5 is working correctly. Hence, for now, you have to use noVNC/HTML5 web browser with port 6901 to access the container.
 * Also, CentOS Dockerfile build still has some connection crash issue. We recommend to use the default build (Ubuntu version's Dockerfile - the default).
-* If you are running container or Openshift or Kubernetes behind your corporate Proxy Servers, you might need to modify Dockerfile to inject the information about Proxy Servers so that the container will function properly if it needs to pull in more packages - this is beyond what this container can provide about your proxy servers information, sorry! But, I will post or add sample "Dockerfile-proxied-exmaple" to show you how to modify Dockerfile to fit your Corproate's Proxy environment for build and run the container later.
+* If you are running container or Openshift or Kubernetes behind your corporate Proxy Servers, you might need to modify Dockerfile to inject the information about your corporate's Proxy Servers so that the container will function properly if it needs to pull in more packages externally - this is beyond what this container can provide about your proxy servers information, sorry! But, I will post or add sample "Dockerfile-proxied-exmaple" to show you how to modify Dockerfile to fit your Corproate's Proxy environment for build and run the container later.
+
